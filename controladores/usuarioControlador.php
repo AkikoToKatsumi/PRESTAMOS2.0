@@ -270,7 +270,7 @@
 
 			
 			$tabla.='<div class="table-responsive">
-				<table class="table table-dark table-sm">
+				<table class="table table-sm">
 					<thead>
 						<tr class="text-center roboto-medium">
 							<th>#</th>
