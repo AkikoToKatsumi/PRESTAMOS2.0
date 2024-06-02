@@ -297,7 +297,7 @@
 						<td>'.$rows['usuario_usuario'].'</td>
 						<td>'.$rows['usuario_email'].'</td>
 						<td>
-							<a href="'.SERVERURL.'user-update/'.mainModel::encryption($rows['usuario_id']).'/" class="btn btn-success">
+							<a href="'.SERVERURL.'user-update/'.mainModel::encryption($rows['usuario_id']).'" class="btn btn-success">
 									<i class="fas fa-sync-alt"></i>	
 							</a>
 						</td>
