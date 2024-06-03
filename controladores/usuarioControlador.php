@@ -267,8 +267,7 @@
 			$total = (int) $total->fetchColumn();
 //contar el # pag totales en la DB o registros x pag
 			$Npaginas=ceil($total/$registros);
-
-			
+	
 			$tabla.='<div class="table-responsive">
 				<table class="table table-sm">
 					<thead>
@@ -325,7 +324,7 @@
 			}
 
 			$tabla.='</tbody></table></div>';
-
+//texto para mostrar cantidad dependiendo la pagina
 			if($total>=1 && $pagina<=$Npaginas){
 				$tabla.='<p class="text-right">Mostrando usuario '.$reg_inicio.' al '.$reg_final.' de un total de '.$total.'</p>';
 
