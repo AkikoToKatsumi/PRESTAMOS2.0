@@ -1,5 +1,4 @@
 <!-- Navbar -->
-
 <nav
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
             id="layout-navbar"
@@ -35,7 +34,7 @@
                     data-size="large"
                     data-show-count="true"
                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
+                    >INFO DESAROLLADORA</a
                   >
                 </li>
 

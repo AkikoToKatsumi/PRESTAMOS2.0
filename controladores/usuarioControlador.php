@@ -380,7 +380,7 @@
 				echo json_encode($alerta);
 				exit();
 			}
-
+//si no  es 1 no puede eliminar
 			/* comprobando privilegios */
 			session_start(['name'=>'SPM']);
 			if($_SESSION['privilegio_spm']!=1){

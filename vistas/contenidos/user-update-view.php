@@ -6,6 +6,7 @@
 		}
 	}
 ?>
+
 <div class="full-box page-header">
 	<h3 class="text-left">
 		<i class="fas fa-sync-alt fa-fw"></i> &nbsp; ACTUALIZAR USUARIO
@@ -14,6 +15,7 @@
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
 	</p>
 </div>
+
 
 <?php if($_SESSION['privilegio_spm']==1){ ?>
 <div class="container-fluid">
@@ -29,7 +31,7 @@
 		</li>
 	</ul>	
 </div>
-<?php } ?>
+<?php } ?> 
 
 <div class="container-fluid">
 	<?php
