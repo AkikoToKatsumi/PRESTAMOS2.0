@@ -51,7 +51,17 @@
 
 		/*--------- Modelo actualizar usuario ---------*/
 		protected static function actualizar_usuario_modelo($datos){
-			$sql=mainModel::conectar()->prepare("UPDATE usuario SET usuario_dni=:DNI,usuario_nombre=:Nombre,usuario_apellido=:Apellido,usuario_telefono=:Telefono,usuario_direccion=:Direccion,usuario_email=:Email,usuario_usuario=:Usuario,usuario_clave=:Clave,usuario_estado=:Estado,usuario_privilegio=:Privilegio WHERE usuario_id=:ID");
+			$sql=mainModel::conectar()->prepare
+			("UPDATE usuario SET usuario_dni=
+			:DNI,usuario_nombre=
+			:Nombre,usuario_apellido=
+			:Apellido,usuario_telefono=
+			:Telefono,usuario_direccion=
+			:Direccion,usuario_email=:Email,usuario_usuario
+			=:Usuario,usuario_clave
+			=:Clave,usuario_estado
+			=:Estado,usuario_privilegio
+			=:Privilegio WHERE usuario_id=:ID");
 
 			$sql->bindParam(":DNI",$datos['DNI']);
 			$sql->bindParam(":Nombre",$datos['Nombre']);

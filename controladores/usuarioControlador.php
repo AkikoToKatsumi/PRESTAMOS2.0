@@ -429,7 +429,7 @@
 
 		/*--------- Controlador actualizar usuario ---------*/
 		public function actualizar_usuario_controlador(){
-
+//vid 41
 			// Recibiendo el id
 			$id=mainModel::decryption($_POST['usuario_id_up']);
 			$id=mainModel::limpiar_cadena($id);
@@ -475,7 +475,7 @@
 			$admin_clave=mainModel::limpiar_cadena($_POST['clave_admin']);
 
 			$tipo_cuenta=mainModel::limpiar_cadena($_POST['tipo_cuenta']);
-
+//vid42
 			/*== comprobar campos vacios ==*/
 			if($dni=="" || $nombre=="" || $apellido=="" || $usuario=="" || $admin_usuario=="" || $admin_clave==""){
 				$alerta=[
@@ -690,7 +690,7 @@
 				$clave=$campos['usuario_clave'];
 			}
 
-
+//vid44
 			/*== Comprobando credenciales para actualizar datos ==*/
 			if($tipo_cuenta=="Propia"){
 				$check_cuenta=mainModel::ejecutar_consulta_simple("SELECT usuario_id FROM usuario WHERE usuario_usuario='$admin_usuario' AND usuario_clave='$admin_clave' AND usuario_id='$id'");

@@ -51,33 +51,61 @@
 				<div class="row">
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="usuario_dni" class="bmd-label-floating">DNI</label>
-							<input type="text" pattern="[0-9-]{1,20}" class="form-control" name="usuario_dni_up" id="usuario_dni" maxlength="20" value="<?php echo $campos['usuario_dni']; ?>" >
+							<label for="usuario_dni" 
+							class="bmd-label-floating">DNI</label>
+							<input type="text" 
+							pattern="[0-9-]{1,20}" 
+							class="form-control" 
+							name="usuario_dni_up" 
+							id="usuario_dni" maxlength="20" 
+							value="<?php echo $campos['usuario_dni']; ?>" >
 						</div>
 					</div>
 					
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="usuario_nombre" class="bmd-label-floating">Nombres</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="usuario_nombre_up" id="usuario_nombre" maxlength="35" value="<?php echo $campos['usuario_nombre']; ?>" >
+							<label for="usuario_nombre"
+							 class="bmd-label-floating">Nombres</label>
+							<input type="text" 
+							pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" 
+							class="form-control" 
+							name="usuario_nombre_up" 
+							id="usuario_nombre" maxlength="35" 
+							value="<?php echo $campos['usuario_nombre']; ?>" >
 						</div>
 					</div>
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="usuario_apellido" class="bmd-label-floating">Apellidos</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="usuario_apellido_up" id="usuario_apellido" maxlength="35" value="<?php echo $campos['usuario_apellido']; ?>" >
+							<label for="usuario_apellido" 
+							class="bmd-label-floating">Apellidos</label>
+							<input type="text" 
+							pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}"
+							 class="form-control" name="usuario_apellido_up" 
+							 id="usuario_apellido" maxlength="35"
+							  value="<?php echo 
+							  $campos['usuario_apellido']; ?>" >
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
-							<label for="usuario_telefono" class="bmd-label-floating">Teléfono</label>
-							<input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="usuario_telefono_up" id="usuario_telefono" maxlength="20" value="<?php echo $campos['usuario_telefono']; ?>" >
+							<label for="usuario_telefono"
+							 class="bmd-label-floating">Teléfono</label>
+							<input type="text"
+							 pattern="[0-9()+]{8,20}" class="form-control" 
+							 name="usuario_telefono_up" id="usuario_telefono" 
+							 maxlength="20" value="<?php 
+							 echo $campos['usuario_telefono']; ?>" >
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
-							<label for="usuario_direccion" class="bmd-label-floating">Dirección</label>
-							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="usuario_direccion_up" id="usuario_direccion" maxlength="190" value="<?php echo $campos['usuario_direccion']; ?>" >
+							<label for="usuario_direccion" 
+							class="bmd-label-floating">Dirección</label>
+							<input type="text" 
+							pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" 
+							class="form-control" name="usuario_direccion_up"
+							 id="usuario_direccion" maxlength="190" 
+							 value="<?php echo $campos['usuario_direccion']; ?>" >
 						</div>
 					</div>
 				</div>
@@ -85,30 +113,46 @@
 		</fieldset>
 		<br><br><br>
 		<fieldset>
-			<legend><i class="fas fa-user-lock"></i> &nbsp; Información de la cuenta</legend>
+			<legend><i class="fas fa-user-lock"></i>
+			 &nbsp; Información de la cuenta</legend>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-md-6">
 						<div class="form-group">
 							<label for="usuario_usuario" class="bmd-label-floating">Nombre de usuario</label>
-							<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="usuario_usuario_up" id="usuario_usuario" maxlength="35" value="<?php echo $campos['usuario_usuario']; ?>" >
+							<input type="text" pattern="[a-zA-Z0-9]{1,35}" 
+							class="form-control" name="usuario_usuario_up" 
+							id="usuario_usuario" maxlength="35" 
+							value="<?php echo $campos['usuario_usuario']; ?>" >
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
-							<label for="usuario_email" class="bmd-label-floating">Email</label>
-							<input type="email" class="form-control" name="usuario_email_up" id="usuario_email" maxlength="70" value="<?php echo $campos['usuario_email']; ?>" >
+							<label for="usuario_email" 
+							class="bmd-label-floating">Email</label>
+							<input type="email" 
+							class="form-control"
+							 name="usuario_email_up"
+							  id="usuario_email"
+							  maxlength="70" 
+							  value="<?php echo $campos['usuario_email']; ?>" >
 						</div>
 					</div>
-					<?php if($_SESSION['privilegio_spm']==1 && $campos['usuario_id']!=1){ ?>
-					<div class="col-12">
-						<div class="form-group">
-							<span>Estado de la cuenta &nbsp; <?php if($campos['usuario_estado']=="Activa"){ echo '<span class="badge badge-info">Activa</span>'; }else{ echo '<span class="badge badge-danger">Deshabilitada</span>'; } ?></span>
-							<select class="form-control" name="usuario_estado_up">
-								<option value="Activa" <?php if($campos['usuario_estado']=="Activa"){ echo 'selected=""'; } ?> >Activa</option>
-								<option value="Deshabilitada" <?php if($campos['usuario_estado']=="Deshabilitada"){ echo 'selected=""'; } ?> >Deshabilitada</option>
-							</select>
-						</div>
+						<?php if($_SESSION['privilegio_spm']==1 && $campos['usuario_id']!=1){ ?>
+						<div class="col-12">
+							<div class="form-group">
+								<span>Estado de la cuenta &nbsp; <?php if($campos
+								['usuario_estado']=="Activa")
+								{ echo '<span class="badge badge-info">Activa</span>';
+								}else{ echo '<span class="badge badge-danger">Deshabilitada</span>'; } ?></span>
+									<select class="form-control" 
+									name="usuario_estado_up">
+									<option value="Activa" 
+									<?php if($campos['usuario_estado']=="Activa"){ echo 'selected=""'; } ?> >Activa</option>
+									<option value="Deshabilitada"
+									<?php if($campos['usuario_estado']=="Deshabilitada"){ echo 'selected=""'; } ?> >Deshabilitada</option>
+								</select>
+							</div>
 					</div>
 					<?php } ?>
 				</div>
@@ -128,8 +172,12 @@
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
-							<label for="usuario_clave_nueva_2" class="bmd-label-floating">Repetir contraseña</label>
-							<input type="password" class="form-control" name="usuario_clave_nueva_2" id="usuario_clave_nueva_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
+							<label for="usuario_clave_nueva_2" 
+							class="bmd-label-floating">Repetir contraseña</label>
+							<input type="password" 
+							class="form-control" 
+							name="usuario_clave_nueva_2" id="usuario_clave_nueva_2" 
+							pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
 						</div>
 					</div>
 				</div>
@@ -185,7 +233,8 @@
 		<input type="hidden" name="tipo_cuenta" value="Propia">
 		<?php } ?>
 		<p class="text-center" style="margin-top: 40px;">
-			<button type="submit" class="btn btn-raised btn-success btn-sm"><i class="fas fa-sync-alt"></i> &nbsp; ACTUALIZAR</button>
+			<button type="submit" class="btn btn-raised btn-success btn-sm">
+				<i class="fas fa-sync-alt"></i> &nbsp; ACTUALIZAR</button>
 	
 		</p>
 	</form>

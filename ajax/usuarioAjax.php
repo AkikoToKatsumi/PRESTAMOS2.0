@@ -2,7 +2,8 @@
 	$peticionAjax=true;
 	require_once "../config/APP.php";
 
-	if(isset($_POST['usuario_dni_reg']) || isset($_POST['usuario_id_del']) || isset($_POST['usuario_id_up'])){
+	if(isset($_POST['usuario_dni_reg']) || isset($_POST['usuario_id_del']) 
+	|| isset($_POST['usuario_id_up'])){
 
 		/*--------- Instancia al controlador ---------*/
 		require_once "../controladores/usuarioControlador.php";
@@ -23,7 +24,7 @@
 		if(isset($_POST['usuario_id_up'])){
 			echo $ins_usuario->actualizar_usuario_controlador();
 		}
-
+//si viiene definido las variables que estan ahi se puede actualizar ^usa el controlador^
 		
 	}else{
 		session_start(['name'=>'SPM']);
