@@ -1,3 +1,9 @@
+<?php
+	if($_SESSION['privilegio_spm']!=1){
+		echo $lc->forzar_cierre_sesion_controlador();
+		exit();
+	}
+?>
 <div class="full-box page-header">
 				<h3 class="text-left">
 					<i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR CLIENTE
@@ -23,8 +29,8 @@
 			
 			<!-- Content here-->
 			<div class="container-fluid">
-			<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>ajax/clienteAjax.php" 
-			method="POST" data-form="save" autocomplete="off">
+			<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>ajax/clienteAjax.php" method="POST" data-form="save" autocomplete="off">
+		
 					<fieldset>
 						<legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
 						<div class="container-fluid">

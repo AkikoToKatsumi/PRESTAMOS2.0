@@ -40,7 +40,7 @@
 			}
 
 
-            if(mainModel::verificar_datos("[a-zA- ZáéíóúÁÉÍÓÚ]{1,40}",$nombre)){
+            if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}",$nombre)){
 				$alerta=[
 					"Alerta"=>"simple",
 					"Titulo"=>"Ocurrió un error inesperado",
@@ -51,7 +51,7 @@
 				exit();
 			}
 
-            if(mainModel::verificar_datos("[a-zA- ZáéíóúÁÉÍÓÚ]{1,40}",$apellido)){
+            if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}",$apellido)){
 				$alerta=[
 					"Alerta"=>"simple",
 					"Titulo"=>"Ocurrió un error inesperado",
@@ -99,20 +99,19 @@
 			exit();
 		}
 		$datos_cliente_reg=[
-			"DNI"=>$dni,
-			"Nombre"=>$nombre,
-			"Apellido"=>$apellido,
-			"Telefono"=>$telefono,
-			"Direccion"=>$direcion
+				"DNI"=>$dni,
+				"Nombre"=>$nombre,
+				"Apellido"=>$apellido,
+				"Telefono"=>$telefono,
+				"Direccion"=>$direcion
 		];
 
-        $agregar_cliente= clienteModelo::agregar_cliente_modelo(
-			$datos_cliente_reg);
+        $agregar_cliente=clienteModelo::agregar_cliente_modelo($datos_cliente_reg);
 
 			if($agregar_cliente->rowCount()==1){
 				$alerta=[
 					"Alerta"=>"limpiar",
-					"Titulo"=>"Cliente ",
+					"Titulo"=>"Cliente",
 					"Texto"=>"Los datos del cliente fueron registrados",
 					"Tipo"=>"success"
 				];
