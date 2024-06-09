@@ -106,17 +106,16 @@
 			"Direccion"=>$direcion
 		];
 
-        $agregar_cliente=clienteModelo::agregar_cliente_modelo(
-			
-		$datos_cliente_reg);
+        $agregar_cliente= clienteModelo::agregar_cliente_modelo(
+			$datos_cliente_reg);
+
 			if($agregar_cliente->rowCount()==1){
 				$alerta=[
 					"Alerta"=>"limpiar",
-					"Titulo"=>"Cliente",
+					"Titulo"=>"Cliente ",
 					"Texto"=>"Los datos del cliente fueron registrados",
 					"Tipo"=>"success"
 				];
-			
 			}else{
 				$alerta=[
 					"Alerta"=>"simple",
@@ -126,6 +125,5 @@
 				];
 			}
 			echo json_encode($alerta);
-		
-        }//fin controlador
+        } //fin controlador
     }
