@@ -89,8 +89,7 @@
 		$ins_usuario = new usuarioControlador();
 
 		echo $ins_usuario->paginador_usuario_controlador($pagina[1],15,$_SESSION
-		['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],$_SESSION ['
-		busqueda_usuario']);
+		['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],$_SESSION ['busqueda_usuario']);
 	?>
 			</div>
 			<?php } ?>
