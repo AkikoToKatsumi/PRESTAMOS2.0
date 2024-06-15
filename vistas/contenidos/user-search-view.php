@@ -26,11 +26,13 @@
 					</li>
 				</ul>	
 			</div>
+
 			<?php
 			if(!isset($_SESSION['busqueda_usuario']) && empty($_SESSION['busqueda_usuario'
 			])){
 			?>
 			<!-- Content -->
+			 
 			<div class="container-fluid">
 				<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>
 				ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off">

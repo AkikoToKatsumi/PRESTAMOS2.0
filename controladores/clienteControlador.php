@@ -160,10 +160,8 @@
 	//conect a la DB para 
 				$conexion = mainModel::conectar();
 	//almacenar datos desde la DB
-	
 				$datos = $conexion->query($consulta);
 				$datos = $datos->fetchAll(); 
-	
 				$total = $conexion->query("SELECT FOUND_ROWS()");
 				$total = (int) $total->fetchColumn();
 	//contar el # pag totales en la DB o registros x pag
@@ -188,7 +186,6 @@
 							$tabla.='</tr>
 						</thead>
 						<tbody>';
-
 
 				if($total>=1 && $pagina<=$Npaginas){
 					$contador=$inicio+1;
@@ -217,7 +214,6 @@
 										</a>
 									</td>';
 								}
-
 								if($privilegio==1){
 								$tabla.='<td>
 									<form class="FormularioAjax" action="'.SERVERURL.'ajax/clienteAjax.php" 
@@ -254,8 +250,6 @@
 	
 					$tabla.=mainModel::paginador_tablas($pagina,$Npaginas,$url,7);
 				}
-	
 				return $tabla;
 			} /* Fin controlador */
-	
     }
