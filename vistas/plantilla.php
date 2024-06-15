@@ -60,7 +60,6 @@ class="light-style layout-menu-fixed"
     
      $vistas = $IV-> obtener_vistas_controlador();
 	 //condicional para detectar login
-
      if ($vistas=="login" || $vistas=="404"){
 		require_once "./vistas/contenidos/".$vistas."-view.php";
 

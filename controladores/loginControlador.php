@@ -41,6 +41,8 @@
 				</script>
 				';
 				exit();
+
+				
 			}
 
 			if(mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave)){
@@ -127,6 +129,7 @@
 					"Tipo"=>"error"
 				];
 			}
+			
 			echo json_encode($alerta);
 		} /* Fin controlador */
 	}
