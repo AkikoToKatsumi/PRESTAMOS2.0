@@ -201,9 +201,9 @@
 							<td>'.$rows['cliente_nombre'].'</td>
 							<td>'.$rows['cliente_apellido'].'</td>
 							<td>'.$rows['cliente_telefono'].'</td>
-							<td><button type="button" class="btn btn-info" 
+							<td><button type="button" class="btn btn-info"
 							data-toggle="popover" data-trigger="hover" title="'.$rows['cliente_nombre'].' '.$rows['cliente_apellido'].'
-									" data-content="'.$rows['cliente_direccion'].'">
+							" data-content="'.$rows['cliente_direccion'].'">
 										<i class="fas fa-info-circle"></i>
 									</button></td>';
 
