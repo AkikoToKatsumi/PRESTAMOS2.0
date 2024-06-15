@@ -1,3 +1,9 @@
+<?php
+	if($_SESSION['privilegio_spm']!=1){
+		echo $lc->forzar_cierre_sesion_controlador();
+		exit();
+	}
+?>
 <div class="full-box page-header">
 				<h3 class="text-left">
 					<i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CLIENTE
@@ -6,17 +12,17 @@
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
 				</p>
 			</div>
-
+			
 			<div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
 					<li>
-						<a href="<?php echo SERVERURL; ?>client-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR CLIENTE</a>
+						<a href="<?php echo SERVERURL ?>client-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR CLIENTE</a>
 					</li>
 					<li>
-						<a href="<?php echo SERVERURL; ?>client-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CLIENTES</a>
+						<a href="<?php echo SERVERURL ?>client-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CLIENTES</a>
 					</li>
 					<li>
-						<a class="active" href="<?php echo SERVERURL; ?>client-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CLIENTE</a>
+						<a class="<?php echo SERVERURL ?>active" href="client-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CLIENTE</a>
 					</li>
 				</ul>	
 			</div>
@@ -25,8 +31,8 @@
 			if(!isset($_SESSION['busqueda_cliente']) && empty($_SESSION['busqueda_cliente'
 			])){
 			?>
-			<!-- Content here-->
-
+			<!-- Content -->
+			 
 			<div class="container-fluid">
 				<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>
 				ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off">
@@ -41,11 +47,13 @@
 									name="busqueda_inicial" id="inputSearch" maxlength="30">
 								</div>
 							</div>
+							
 							<div class="col-12">
 								<p class="text-center" style="margin-top: 40px;">
 									<button type="submit" 
 									class="btn btn-raised btn-info">
 									<i class="fas fa-search"></i> &nbsp; BUSCAR</button>
+
 								</p>
 							</div>
 						</div>
@@ -78,14 +86,16 @@
 					</div>
 				</form>
 			</div>
-			
+
 			<div class="container-fluid">
 			<?php
 		require_once "./controladores/clienteControlador.php";
 		$ins_cliente = new clienteControlador();
 
 		echo $ins_cliente->paginador_cliente_controlador($pagina[1],15,
-		$_SESSION['privilegio_spm'],$pagina[0],$_SESSION['busqueda_cliente']);
+		$_SESSION['privilegio_spm'],$pagina[0],$_SESSION ['busqueda_cliente']);
 	?>
 			</div>
 			<?php } ?>
+			
+			

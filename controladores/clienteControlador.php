@@ -146,7 +146,7 @@
 
 	            //contar cuantos registros hay en  la base dedatos
 				if(isset($busqueda) && $busqueda!=""){
-					$consulta="SELECT SQL_CALC_FOUND_ROWS * FROM cliente WHERE 
+					$consulta="SELECT SQL_CALC_FOUND_ROWS * FROM cliente WHERE (( 
 					cliente_dni LIKE '%$busqueda%' OR cliente_nombre LIKE 
 					'%$busqueda%' OR cliente_apellido LIKE
 					 '%$busqueda%' OR cliente_telefono LIKE 
