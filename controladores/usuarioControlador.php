@@ -7,7 +7,6 @@
 	}
 
 	class usuarioControlador extends usuarioModelo{
-
 		/*--------- Controlador agregar usuario ---------*/
 		public function agregar_usuario_controlador(){
 			$dni=mainModel::limpiar_cadena($_POST['usuario_dni_reg']);

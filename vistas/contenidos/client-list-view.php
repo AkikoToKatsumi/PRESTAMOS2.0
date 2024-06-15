@@ -46,7 +46,9 @@
 								<td>APELLIDO DEL CLIENTE</td>
 								<td>72349874</td>
 								<td>
-									<button type="button" class="btn btn-info" data-toggle="popover" data-trigger="hover" title="Nombre del cliente" data-content="Direccion completa del cliente">
+									<button type="button" class="btn btn-info" data-toggle="popover" 
+									data-trigger="hover" title="Nombre del cliente" 
+									data-content="Direccion completa del cliente">
 										<i class="fas fa-info-circle"></i>
 									</button>
 								</td>
