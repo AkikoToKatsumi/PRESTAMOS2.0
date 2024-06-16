@@ -333,6 +333,7 @@
 			return clienteModelo::datos_ciente_modelo($tipo,$id);
 		   }//fin controlador
 
+
 		   //controlador act cliente//
 		public function actualizar_cliente_controlador(){
 			//recuoerar el id
@@ -353,16 +354,16 @@
 				exit();
 		   }else{
 			$campos=$check_cliente->fetch();
-		}	  
-		$dni=mainModel::limpiar_cadena($_POST['cliente_dni_up']);
-		$nombre=mainModel::limpiar_cadena($_POST['cliente_nombre_up']);
-		$apellido=mainModel::limpiar_cadena($_POST['cliente_apellido_up']);
-        $telefono=mainModel::limpiar_cadena($_POST['cliente_telefono_up']);
-        $direccion=mainModel::limpiar_cadena($_POST['cliente_direccion_up']);
+			}	  
+			$dni=mainModel::limpiar_cadena($_POST['cliente_dni_up']);
+			$nombre=mainModel::limpiar_cadena($_POST['cliente_nombre_up']);
+			$apellido=mainModel::limpiar_cadena($_POST['cliente_apellido_up']);
+        	$telefono=mainModel::limpiar_cadena($_POST['cliente_telefono_up']);
+        	$direccion=mainModel::limpiar_cadena($_POST['cliente_direccion_up']);
         
-		//comprobar campos vacios
-		if($dni=="" || $nombre=="" || $apellido=="" || $telefono=="" ||
-		 $direccion== ""){
+			//comprobar campos vacios
+			if($dni=="" || $nombre=="" || $apellido=="" || $telefono=="" ||
+		 	$direccion== ""){
 			$alerta=[
 				"Alerta"=>"simple",
 				"Titulo"=>"Ocurrió un error inesperado",
@@ -371,9 +372,9 @@
 			];
 			echo json_encode($alerta);
 			exit();
-		}
-		/*== Verificando integridad de los datos ==*/
-		if(mainModel::verificar_datos("[0-9-]{1,27}",$dni)){
+			}
+			/*== Verificando integridad de los datos ==*/
+			if(mainModel::verificar_datos("[0-9-]{1,27}",$dni)){
 			$alerta=[
 				"Alerta"=>"simple",
 				"Titulo"=>"Ocurrió un error inesperado",
@@ -382,9 +383,9 @@
 			];
 			echo json_encode($alerta);
 			exit();
-		}
+			}
 
-		if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}",$nombre)){
+			if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}",$nombre)){
 			$alerta=[
 				"Alerta"=>"simple",
 				"Titulo"=>"Ocurrió un error inesperado",
@@ -393,9 +394,9 @@
 			];
 			echo json_encode($alerta);
 			exit();
-		}
+			}
 
-		if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}",$apellido)){
+			if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}",$apellido)){
 			$alerta=[
 				"Alerta"=>"simple",
 				"Titulo"=>"Ocurrió un error inesperado",
@@ -404,9 +405,9 @@
 			];
 			echo json_encode($alerta);
 			exit();
-		}
+			}
 
-		if(mainModel::verificar_datos("[0-9()+]{8,20}",$telefono)){
+			if(mainModel::verificar_datos("[0-9()+]{8,20}",$telefono)){
 			$alerta=[
 				"Alerta"=>"simple",
 				"Titulo"=>"Ocurrió un error inesperado",
@@ -415,9 +416,9 @@
 			];
 			echo json_encode($alerta);
 			exit();
-		}
+			}
 
-		if(mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,150}",$direccion)){
+			if(mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,150}",$direccion)){
 			$alerta=[
 				"Alerta"=>"simple",
 				"Titulo"=>"Ocurrió un error inesperado",
@@ -426,13 +427,13 @@
 			];
 			echo json_encode($alerta);
 			exit();
-		}
+			}
 
-		/*== comprobar DNI  ==*/
-    if($dni!=$campos['cliente_dni']){
-		$check_dni=mainModel::ejecutar_consulta_simple("SELECT
-		 cliente_dni FROM cliente WHERE cliente_dni='$dni'");
-		if($check_dni->rowCount()>0){
+			/*== comprobar DNI  ==*/
+    		if($dni!=$campos['cliente_dni']){
+			$check_dni=mainModel::ejecutar_consulta_simple("SELECT
+		 	cliente_dni FROM cliente WHERE cliente_dni='$dni'");
+			if($check_dni->rowCount()>0){
 			$alerta=[
 				"Alerta"=>"simple",
 				"Titulo"=>"Ocurrió un error inesperado",
@@ -441,13 +442,12 @@
 			];
 			echo json_encode($alerta);
 			exit();
-		  }
-	 }
+		  		}
+	 		}	
 		  // comprobar privillegios de admin
 		session_start(['name'=>'SPM']);
 		if($_SESSION['privilegio_spm']<1 || $_SESSION['privilegio_spm']>
 		2){
-			if($check_dni->rowCount()>0){
 				$alerta=[
 					"Alerta"=>"simple",
 					"Titulo"=>"Ocurrió un error inesperado",
@@ -481,6 +481,6 @@
 				];
 		    }
 			echo json_encode($alerta);
-		  }
+		  
 		}//fin de controlador
 	}
