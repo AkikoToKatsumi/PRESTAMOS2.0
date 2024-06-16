@@ -17,6 +17,28 @@
             return $sql;
               
         }
+       /*__Modelo eliminar cliente__*/
+	   protected static function eliminar_cliente_modelo($id){
+		 $sql=mainModel::conectar()->prepare("DELETE FROM cliente WHERE 
+		 cliente_id=:ID");
+		 $sql->bindParam(":ID",$id);
+		 $sql->execute();	
 
+		 return $sql;
 
-        }
+	   }
+	   /*__Modelo edatosclientes__*/
+	   protected static function datos_ciente_modelo($tipo, $id){
+		if($tipo=="Unico"){
+			$sql=mainModel::conectar()->prepare("SELECT * FROM cliente WHERE
+			 cliente_id =:ID");
+			 $sql->bindParam(":ID",$id);
+		}elseif($tipo=="Conteo"){
+		 $sql=mainModel::conectar()->prepare("SELECT cliente_id FROM cliente
+		 ");
+		}
+		
+		$sql->execute();
+		return $sql;
+	   }
+}

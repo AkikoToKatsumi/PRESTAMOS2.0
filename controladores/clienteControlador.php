@@ -126,7 +126,6 @@
 			echo json_encode($alerta);
         } //fin controlador
 
-
 			/*--------- Controlador paginar clientes ---------*/
 			public function paginador_cliente_controlador($pagina,$registros,$privilegio,
 			$url,$busqueda){
@@ -252,4 +251,86 @@
 				}
 				return $tabla;
 			} /* Fin controlador */
-    }
+
+           /*__controlador eliminar clientes___*/
+			public function eliminar_cliente_controlador(){
+				//RECUPERAR ID del cliente
+				$id=mainModel::decryption($_POST['cliente_id_del']);
+				$id=mainModel::limpiar_cadena($id);
+
+				//comprobar el cliente en la DB
+				$check_cliente=mainModel::ejecutar_consulta_simple("SELECT cliente_id
+				FROM cliente WHERE cliente_id='$id'");
+
+				if($check_cliente->rowCount()<=0){
+					$alerta=[
+						"Alerta"=>"simple",
+						"Titulo"=>"Ocurrio un error ",
+						"Texto"=> "No hemos encontrado el cliente en el sistema",
+						"Tipo"=>"error"
+					];
+                echo json_encode($alerta);
+				exit();
+				}
+				//comprobar prestamos
+				$check_prestamos=mainModel::ejecutar_consulta_simple("SELECT cliente_id
+				FROM prestamo WHERE cliente_id='$id' LIMIT 1");
+				if($check_prestamos->rowCount()>0){
+					$alerta=[
+						"Alerta"=>"simple",
+						"Titulo"=>"Ocurrio un error ",
+						"Texto"=> "No podemos eliminar el cliente del sistema",
+						"Tipo"=>"error"
+					];
+                echo json_encode($alerta);
+				exit();
+				}
+               
+				//ccmprobar privilegios de cliente
+				session_start(['name'=>'SPM']);
+				if($_SESSION['privilegio_spm']!=1){
+
+					$alerta=[
+						"Alerta"=>"simple",
+						"Titulo"=>"Ocurrio un error ",
+						"Texto"=> "No tienes los permisos para realizar esta acción",
+						"Tipo"=>"error"
+					];
+                echo json_encode($alerta);
+				exit();
+				}
+
+				$eliminar_cliente=clienteModelo::eliminar_cliente_modelo($id);
+
+				if($eliminar_cliente->rowCount()==1){
+					$alerta=[
+						"Alerta"=>"recargar",
+						"Titulo"=>"Cliente eliminado ",
+						"Texto"=> "cliente eliminado del sistema",
+						"Tipo"=>"succes"
+					];
+
+				}else{
+					$alerta=[
+						"Alerta"=>"simple",
+						"Titulo"=>"Ocurrio un error inesperado ",
+						"Texto"=> "No hemos podido eliminar el cliente, intenta otra vez",
+						"Tipo"=>"error"
+					];
+
+				}
+				echo json_encode($alerta);
+				exit();
+			} /* Fin controlador */
+
+           /*__controlador selec datos clientes___*/
+		   public function datos_ciente_contrlador($tipo,$id){
+			$tipo=mainModel::limpiar_cadena($tipo);
+
+			$id=mainModel::decryption($id);
+			$id=mainModel::limpiar_cadena($id);
+
+			return clienteModelo::datos_ciente_modelo($tipo,$id);
+		   }//fin controlador
+} 
+    

@@ -2,7 +2,7 @@
 	$peticionAjax=true;
 	require_once "../config/APP.php";
 
-	if(isset($_POST['cliente_dni_reg'])){
+	if(isset($_POST['cliente_dni_reg']) || isset($_POST['cliente_id_del'])){
 
 
 		/*--------- Instancia al controlador ---------*/
@@ -15,6 +15,10 @@
             echo $ins_cliente->agregar_cliente_controlador();
 
         }
+		/*Eliminar cliente*/
+		if(isset($_POST['cliente_id_del'])){
+         echo $ins_cliente->eliminar_cliente_controlador();
+		}//fin contr
 
 
 //si viiene definido las variables que estan ahi se puede actualizar ^usa el controlador^
