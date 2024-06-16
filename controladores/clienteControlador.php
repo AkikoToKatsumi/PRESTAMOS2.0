@@ -207,7 +207,7 @@
 									if($privilegio==1 || $privilegio==2){
 										$tabla.='<td>
 										<a href="'.SERVERURL.'user-update/'.mainModel::
-										encryption($rows['cliente_id']).'/" class="btn 
+										encryption($rows['cliente_id']).'" class="btn 
 										btn-success">
 												<i class="fas fa-sync-alt"></i>	
 										</a>
@@ -332,5 +332,44 @@
 
 			return clienteModelo::datos_ciente_modelo($tipo,$id);
 		   }//fin controlador
+
+		   //controlador act cliente//
+		public function actualizar_cliente_controlador(){
+			//recuoerar el id
+			$id=mainModel::decryption($_POST['cliente_id_up']);
+			$id=mainModel::limpiar_cadena($id);
+
+			//comprobar el cliente en la DB
+		   $check_cliente=mainModel::ejecutar_consulta_simple("SELECT * FROM 
+		   cliente WHERE cliente_id='$id'");
+		   if($check_cliente->rowCount()<=0){
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Ocurrio un error",
+					"Texto"=> "No hemos encontrado al cliente",
+					"Tipo"=>"error"
+				];
+				echo json_encode($alerta);
+				exit();
+		   }else{
+			$campos=$check_cliente->fetch();
+		}	  
+		$dni=mainModel::limpiar_cadena($_POST['cliente_dni_up']);
+		$nombre=mainModel::limpiar_cadena($_POST['cliente_nombre_up']);
+		$apellido=mainModel::limpiar_cadena($_POST['cliente_apellido_up']);
+        $telefono=mainModel::limpiar_cadena($_POST['cliente_telefono_up']);
+        $direccion=mainModel::limpiar_cadena($_POST['cliente_direccion_up']);
+
+		if($dni=="" || $nombre=="" || $apellido=="" || $telefono=="" || $direcion== ""){
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrió un error inesperado",
+				"Texto"=>"No has llenado todos los campos que son obligatorios",
+				"Tipo"=>"error"
+			];
+			echo json_encode($alerta);
+			exit();
+		}
+	}//fin de controlador
 } 
     
