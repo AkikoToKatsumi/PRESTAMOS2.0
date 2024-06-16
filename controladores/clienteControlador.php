@@ -14,10 +14,10 @@
             $nombre=mainModel::limpiar_Cadena($_POST['cliente_nombre_reg']);
             $apellido=mainModel::limpiar_Cadena($_POST['cliente_apellido_reg']);
             $telefono=mainModel::limpiar_Cadena($_POST['cliente_telefono_reg']);
-            $direcion=mainModel::limpiar_Cadena($_POST['cliente_direccion_reg']);
+            $direccion=mainModel::limpiar_Cadena($_POST['cliente_direccion_reg']);
 
 			/*== comprobar campos vacios ==*/
-            if($dni=="" || $nombre=="" || $apellido=="" || $telefono=="" || $direcion== ""){
+            if($dni=="" || $nombre=="" || $apellido=="" || $telefono=="" || $direccion== ""){
 				$alerta=[
 					"Alerta"=>"simple",
 					"Titulo"=>"Ocurrió un error inesperado",
@@ -73,7 +73,7 @@
 				exit();
 			}
 
-            if(mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,150}",$direcion)){
+            if(mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,150}",$direccion)){
 				$alerta=[
 					"Alerta"=>"simple",
 					"Titulo"=>"Ocurrió un error inesperado",
@@ -103,7 +103,7 @@
 				"Nombre"=>$nombre,
 				"Apellido"=>$apellido,
 				"Telefono"=>$telefono,
-				"Direccion"=>$direcion
+				"Direccion"=>$direccion
 		];
 
         $agregar_cliente=clienteModelo::agregar_cliente_modelo($datos_cliente_reg);
@@ -206,7 +206,7 @@
 
 									if($privilegio==1 || $privilegio==2){
 										$tabla.='<td>
-										<a href="'.SERVERURL.'user-update/'.mainModel::
+										<a href="'.SERVERURL.'client-update/'.mainModel::
 										encryption($rows['cliente_id']).'" class="btn 
 										btn-success">
 												<i class="fas fa-sync-alt"></i>	
@@ -307,7 +307,7 @@
 						"Alerta"=>"recargar",
 						"Titulo"=>"Cliente eliminado ",
 						"Texto"=> "cliente eliminado del sistema",
-						"Tipo"=>"succes"
+						"Tipo"=>"success"
 					];
 
 				}else{
@@ -359,8 +359,10 @@
 		$apellido=mainModel::limpiar_cadena($_POST['cliente_apellido_up']);
         $telefono=mainModel::limpiar_cadena($_POST['cliente_telefono_up']);
         $direccion=mainModel::limpiar_cadena($_POST['cliente_direccion_up']);
-
-		if($dni=="" || $nombre=="" || $apellido=="" || $telefono=="" || $direcion== ""){
+        
+		//comprobar campos vacios
+		if($dni=="" || $nombre=="" || $apellido=="" || $telefono=="" ||
+		 $direccion== ""){
 			$alerta=[
 				"Alerta"=>"simple",
 				"Titulo"=>"Ocurrió un error inesperado",
@@ -370,6 +372,115 @@
 			echo json_encode($alerta);
 			exit();
 		}
-	}//fin de controlador
-} 
-    
+		/*== Verificando integridad de los datos ==*/
+		if(mainModel::verificar_datos("[0-9-]{1,27}",$dni)){
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrió un error inesperado",
+				"Texto"=>"El DNI no coincide con el formato solicitado",
+				"Tipo"=>"error"
+			];
+			echo json_encode($alerta);
+			exit();
+		}
+
+		if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}",$nombre)){
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrió un error inesperado",
+				"Texto"=>"El nombre no coincide con el formato solicitado",
+				"Tipo"=>"error"
+			];
+			echo json_encode($alerta);
+			exit();
+		}
+
+		if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}",$apellido)){
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrió un error inesperado",
+				"Texto"=>"El apellido coincide con el formato solicitado",
+				"Tipo"=>"error"
+			];
+			echo json_encode($alerta);
+			exit();
+		}
+
+		if(mainModel::verificar_datos("[0-9()+]{8,20}",$telefono)){
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrió un error inesperado",
+				"Texto"=>"El telefono coincide con el formato solicitado",
+				"Tipo"=>"error"
+			];
+			echo json_encode($alerta);
+			exit();
+		}
+
+		if(mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,150}",$direccion)){
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrió un error inesperado",
+				"Texto"=>"La direccion coincide con el formato solicitado",
+				"Tipo"=>"error"
+			];
+			echo json_encode($alerta);
+			exit();
+		}
+
+		/*== comprobar DNI  ==*/
+    if($dni!=$campos['cliente_dni']){
+		$check_dni=mainModel::ejecutar_consulta_simple("SELECT
+		 cliente_dni FROM cliente WHERE cliente_dni='$dni'");
+		if($check_dni->rowCount()>0){
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrió un error inesperado",
+				"Texto"=>"El DNI ya esta registrado",
+				"Tipo"=>"error"
+			];
+			echo json_encode($alerta);
+			exit();
+		  }
+	 }
+		  // comprobar privillegios de admin
+		session_start(['name'=>'SPM']);
+		if($_SESSION['privilegio_spm']<1 || $_SESSION['privilegio_spm']>
+		2){
+			if($check_dni->rowCount()>0){
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Ocurrió un error inesperado",
+					"Texto"=>"No tienes los permisos suficientes",
+					"Tipo"=>"error"
+				];
+				echo json_encode($alerta);
+				exit();
+	    }
+	         $datos_cliente_up=[
+                "DNI"=>$dni,
+				"Nombre"=>$nombre,
+				"Apellido"=>$apellido,
+				"Telefono"=>$telefono,
+				"Direccion"=>$direccion,
+				"ID"=>$id
+			 ];
+               if(clienteModelo::actualizar_cliente_modelo($datos_cliente_up)){
+				$alerta=[
+					"Alerta"=>"recargar",
+					"Titulo"=>"Cliente actualizado",
+					"Texto"=>"Los datos del cliente han sido actualizados",
+					"Tipo"=>"success"
+				];
+			}else{
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Ocurrió un error inesperado",
+					"Texto"=>"No pudimos actualizar los datos",
+					"Tipo"=>"error"
+				];
+		    }
+			echo json_encode($alerta);
+		  }
+		}//fin de controlador
+	}
