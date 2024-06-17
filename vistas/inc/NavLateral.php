@@ -141,14 +141,18 @@
                 </li>
               </ul>
             </li>
+            <?php
+             }
+             if($_SESSION['privilegio_spm']==1 || $_SESSION['privilegio_spm']==2){
+
+            ?>
             <li class="menu-item">
               <a href="<?php echo SERVERURL; ?>company/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Empresa</div>
               </a>
             </li>
-
-              <?php }?>
+            <?php }?>
           </ul>
         </aside>
         <!-- / Menu -->
