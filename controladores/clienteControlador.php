@@ -482,5 +482,5 @@
 		    }
 			echo json_encode($alerta);
 		  
-		}//fin de controlador
+	}//fin de controlador
 	}
