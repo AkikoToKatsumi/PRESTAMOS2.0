@@ -66,8 +66,9 @@
 ?>
 
 <div class="container-fluid">
-    <form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>
-    ajax/empresaAjax.php" method="POST" data-form="update" 
+<form class="form-neon FormularioAjax"   
+    action="<?php echo SERVERURL; ?>ajax/empresaAjax.php" 
+    method="POST" data-form="update" 
     autocomplete="off">
 
     <input type="hidden" name="empresa_id_up" value="<?php echo $campos[
