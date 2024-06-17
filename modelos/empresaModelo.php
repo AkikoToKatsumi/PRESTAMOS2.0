@@ -25,4 +25,7 @@ protected static function datos_empresa_modelo() {
 
       return $sql;
     }
+    /*Modelo act empresa*/
+    protected static function actualizar_empresa_modelo($datos){
+    }
 }

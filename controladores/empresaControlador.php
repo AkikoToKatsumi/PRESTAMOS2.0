@@ -19,8 +19,7 @@
       $email=mainModel::limpiar_cadena($_POST['empresa_email_reg']);
       $telefono=mainModel::limpiar_cadena($_POST['empresa_telefono_reg'
     ]);
-    $direccion=mainModel::limpiar_cadena($_POST['
-    empresa_direccion_reg']);
+    $direccion=mainModel::limpiar_cadena($_POST['empresa_direccion_reg']);
 
     	/*== comprobar campos vacios ==*/
 	if($nombre=="" || $email=="" ||$telefono=="" || $direccion==""){
