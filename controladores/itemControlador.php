@@ -156,7 +156,7 @@ $url,$busqueda){
 
 	//contar cuantos registros hay en  la base dedatos
 	if(isset($busqueda) && $busqueda!=""){
-		$consulta="SELECT SQL_CALC_FOUND_ROWS * FROM item WHERE (( 
+		$consulta="SELECT SQL_CALC_FOUND_ROWS * FROM item WHERE
 		item_codigo LIKE '%$busqueda%' OR item_nombre LIKE 
 		'%$busqueda%' ORDER BY item_nombre ASC LIMIT $inicio,$registros";
 	//solo contara una cant de registro por pagina
@@ -206,8 +206,7 @@ $url,$busqueda){
 				<td>'.$rows['item_stock'].'</td>
 				<td>'.$rows['item_estado'].'</td>
 				<td><button type="button" class="btn btn-info"
-				data-toggle="popover" data-trigger="hover" 
-				title="'.$rows['item_nombre'].'" data-content="'.$rows['item_detalle'].'">
+				data-toggle="popover" data-trigger="hover" title="'.$rows['item_nombre'].'"data-content="'.$rows['item_detalle'].'">
 							<i class="fas fa-info-circle"></i>
 						</button></td>';
 
@@ -259,4 +258,66 @@ $url,$busqueda){
 	return $tabla;
 } /* Fin controlador */
 
-}
+ /*Controlador liminaritem*/
+ public function eliminar_item_controlador(){
+
+	$id=mainModel::decryption($_POST['item_id_del']);
+	$id=mainModel::limpiar_cadena($id);
+  
+	//Comprobar que el item este refistrado en DB
+	$check_item=mainModel::ejecutar_consulta_simple("SELECT item_id FROM item WHERE item_id='$id'");
+	if($check_item->rowCount()<=0){
+	  $alerta=[
+		  "Alerta"=>"simple",
+		  "Titulo"=>"Ocurrió un error inesperado",
+		  "Texto"=>"El item no existe",
+		  "Tipo"=>"error"
+	  ];
+	  echo json_encode($alerta);
+	  exit();
+	   }
+	   //Comprobando detalles de prestamos
+	   $check_prestamos=mainModel::ejecutar_consulta_simple("SELECT item_id FROM detalle WHERE item_id='$id' LIMIT 1");
+	   if($check_prestamos->rowCount()>0){
+		 $alerta=[
+			 "Alerta"=>"simple",
+			 "Titulo"=>"Ocurrió un error inesperado",
+			 "Texto"=>"No se puede eliminar el item, tiene prestamos asociados",
+			 "Tipo"=>"error"
+		 ];
+		 echo json_encode($alerta);
+		 exit();
+		  }
+		  //ccmprobar privilegios 
+		  session_start(['name'=>'SPM']);
+		  if($_SESSION['privilegio_spm']!=1){
+			  $alerta=[
+				  "Alerta"=>"simple",
+				  "Titulo"=>"Ocurrio un error ",
+				  "Texto"=> "No tienes los permisos para realizar esta acción",
+				  "Tipo"=>"error"
+			  ];
+		  echo json_encode($alerta);
+		  exit();
+		  }
+		  $eliminar_item=itemModelo::eliminar_item_modelo($id);
+  
+		  if($eliminar_item->rowCount()==1){
+			  $alerta=[
+				  "Alerta"=>"recargar",
+				  "Titulo"=>"Item eliminado",
+				  "Texto"=> "Item eliminado",
+				  "Tipo"=>"success"
+			  ];
+  
+		  }else{
+			  $alerta=[
+				  "Alerta"=>"simple",
+				  "Titulo"=>"Ocurrio un error ",
+				  "Texto"=> "No hemos podido eliminar el item",
+				  "Tipo"=>"error"
+			  ];
+		  }
+		  echo json_encode($alerta);
+		}
+	}
