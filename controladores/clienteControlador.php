@@ -323,7 +323,7 @@
 			} /* Fin controlador */
 
            /*__controlador selec datos clientes___*/
-		   public function datos_cliente_contrlador($tipo,$id){
+		   public function datos_cliente_controlador($tipo,$id){
 			$tipo=mainModel::limpiar_cadena($tipo);
 
 			$id=mainModel::decryption($id);
@@ -443,6 +443,7 @@
 			exit();
 		  		}
 	 		}	
+			
 		  // comprobar privillegios de admin
 		session_start(['name'=>'SPM']);
 		if($_SESSION['privilegio_spm']<1 || $_SESSION['privilegio_spm']>

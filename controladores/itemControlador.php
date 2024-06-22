@@ -331,4 +331,169 @@ $url,$busqueda){
 			return itemModelo::datos_item_modelo($tipo,$id);
 		   }//fin controlador
 
+	           //controlador act c-iteem//
+	public function actualizar_item_controlador(){
+		//recuoerar el id
+		$id=mainModel::decryption($_POST['item_id_up']);
+		$id=mainModel::limpiar_cadena($id);
+
+		//comprobar el item en la DB
+	   $check_item=mainModel::ejecutar_consulta_simple("SELECT * FROM item WHERE item_id='$id'");
+	   if($check_item->rowCount()<=0){
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrio un error",
+				"Texto"=> "No hemos encontrado el item",
+				"Tipo"=>"error"
+			];
+			echo json_encode($alerta);
+			exit();
+	   }else{
+		$campos=$check_item->fetch();
+		}	  
+		$codigo=mainModel::limpiar_cadena($_POST['item_codigo_up']);
+		$nombre=mainModel::limpiar_cadena($_POST['item_nombre_up']);
+		$stock=mainModel::limpiar_cadena($_POST['item_stock_up']);
+		$estado=mainModel::limpiar_cadena($_POST['item_estado_up']);
+		$detalle=mainModel::limpiar_cadena($_POST['item_detalle_up']);
+	
+	/*== comprobar campos vacios ==*/
+	if($codigo=="" || $nombre=="" ||$stock=="" || $estado==""){
+		$alerta=[
+			"Alerta"=>"simple",
+			"Titulo"=>"Ocurrió un error inesperado",
+			"Texto"=>"No has llenado todos los campos que son obligatorios",
+			"Tipo"=>"error"
+		];
+		echo json_encode($alerta);
+		exit();
 	}
+	/*== Verificando integridad de los datos ==*/
+	if(mainModel::verificar_datos("[a-zA-Z0-9-]{1,45}",$codigo)){
+		$alerta=[
+			"Alerta"=>"simple",
+			"Titulo"=>"Ocurrió un error inesperado",
+			"Texto"=>"El codigo no coincide con el formato solicitado",
+			"Tipo"=>"error"
+		];
+		echo json_encode($alerta);
+		exit();
+	}
+
+	if(mainModel::verificar_datos("[a-zA-záéíóúÁÉÍÓÚñÑ0-9 ]{1,140}",$nombre)){
+		$alerta=[
+			"Alerta"=>"simple",
+			"Titulo"=>"Ocurrió un error inesperado",
+			"Texto"=>"El Nombre no coincide con el formato solicitado",
+			"Tipo"=>"error"
+		];
+		echo json_encode($alerta);
+		exit();
+	}
+
+	if(mainModel::verificar_datos("[0-9]{1,9}",$stock)){
+		$alerta=[
+			"Alerta"=>"simple",
+			"Titulo"=>"Ocurrió un error inesperado",
+			"Texto"=>"El Stock no coincide con el formato solicitado",
+			"Tipo"=>"error"
+		];
+		echo json_encode($alerta);
+		exit();
+	}
+	if($detalle!=""){
+		if(mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}",$detalle)){
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrió un error inesperado",
+				"Texto"=>"El detalle no coincide con el formato solicitado",
+				"Tipo"=>"error"
+			];
+			echo json_encode($alerta);
+			exit();
+		}
+
+	}
+
+	if($estado!="Habilitado" && $estado!= "Deshabilitado"){
+					$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Ocurrió un error inesperado",
+					"Texto"=>"El estado no coincide con el formato solicitado",
+					"Tipo"=>"error"
+				];
+				echo json_encode($alerta);
+				exit();
+			
+     	}
+        /**Comp codigos*/
+		if($codigo!=$campos['item_codigo']){
+			$check_codigo=mainModel::ejecutar_consulta_simple("SELECT 
+			item_codigo FROM item WHERE item_codigo='$codigo'");
+			if($check_codigo->rowCount()>0){
+			   $alerta=[
+				   "Alerta"=>"simple",
+				   "Titulo"=>"Ocurrió un error inesperado",
+				   "Texto"=>"El codigo ya existe ",
+				   "Tipo"=>"error"
+			   ];
+			   echo json_encode($alerta);
+			   exit();
+			}
+		}
+
+		 /**Comp cnom*/
+		 if($nombre!=$campos['item_nombre']){
+			 $check_nombre=mainModel::ejecutar_consulta_simple("SELECT 
+			 item_nombre FROM item WHERE item_nombre='$nombre'");
+			 if($check_nombre->rowCount()>0){
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Ocurrió un error inesperado",
+					"Texto"=>"El Nombre del item ya existe ",
+					"Tipo"=>"error"
+				];
+				echo json_encode($alerta);
+				exit();
+			 }		
+		 }	
+		  // comprobar privillegios de admin
+		session_start(['name'=>'SPM']);
+		if($_SESSION['privilegio_spm']<1 || $_SESSION['privilegio_spm']>
+		2){
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Ocurrió un error inesperado",
+					"Texto"=>"No tienes los permisos suficientes",
+					"Tipo"=>"error"
+				];
+				echo json_encode($alerta);
+				exit();
+	    }
+		$datos_item_up=[
+			"Codigo"=>$codigo,
+			"Nombre"=>$nombre,
+			"Stock"=>$stock,
+			"Estado"=>$estado,
+			"Detalle"=>$detalle,
+			"ID"=>$id
+		   ];
+		   if(itemModelo::actualizar_item_modelo($datos_item_up)){
+			$alerta=[
+				"Alerta"=>"recargar",
+				"Titulo"=>"ACTUALIZADO",
+				"Texto"=>"Los datos han sido guardados ",
+				"Tipo"=>"success"
+			];
+			
+		   }else{
+			$alerta=[
+				"Alerta"=>"simple",
+				"Titulo"=>"Ocurrió un error inesperado",
+				"Texto"=>"No se pudo actualizar el item",
+				"Tipo"=>"error"
+			];
+		}
+		echo json_encode($alerta);
+    }//fin de controlador
+}

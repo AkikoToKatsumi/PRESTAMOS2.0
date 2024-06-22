@@ -45,8 +45,7 @@
 		protected static function actualizar_cliente_modelo($datos){
 			$sql=mainModel::conectar()->prepare("UPDATE cliente SET 
 			cliente_dni=:DNI,cliente_nombre=:Nombre, cliente_apellido=
-			:Apellido,cliente_telefono=:Telefono,
-			cliente_direccion=:Direccion WHERE cliente_id=:ID");
+			:Apellido,cliente_telefono=:Telefono,cliente_direccion=:Direccion WHERE cliente_id=:ID");
 
 			$sql->bindParam(":DNI",$datos['DNI']);
 			$sql->bindParam(":Nombre",$datos['Nombre']);
@@ -59,6 +58,5 @@
 			return $sql;
 
 		}
-
 
 }

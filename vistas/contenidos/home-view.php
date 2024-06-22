@@ -14,7 +14,7 @@
 				require_once "./controladores/clienteControlador.php";
 				$ins_cliente = new clienteControlador();
 
-				$total_clientes = $ins_cliente->datos_ciente_contrlador("Conteo",0);	
+				$total_clientes = $ins_cliente->datos_cliente_controlador("Conteo",0);	
 				?>
 				<a href="<?php echo SERVERURL; ?>client-new/" class="tile">
 					<div class="tile-tittle">Clientes</div>
