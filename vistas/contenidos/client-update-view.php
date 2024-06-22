@@ -35,7 +35,7 @@
 
 				$ins_cliente= new clienteControlador();
 
-				$datos_cliente=$ins_cliente->datos_ciente_contrlador("Unico",
+				$datos_cliente=$ins_cliente->datos_cliente_contrlador("Unico",
 			$pagina[1]);
 			if($datos_cliente->rowCount()==1){
 				$campos=$datos_cliente->fetch();

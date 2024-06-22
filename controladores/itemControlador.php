@@ -320,4 +320,15 @@ $url,$busqueda){
 		  }
 		  echo json_encode($alerta);
 		}
+
+		 /*__controlador  datos item*/
+		 public function datos_item_controlador($tipo,$id){
+			$tipo=mainModel::limpiar_cadena($tipo);
+
+			$id=mainModel::decryption($id);
+			$id=mainModel::limpiar_cadena($id);
+
+			return itemModelo::datos_item_modelo($tipo,$id);
+		   }//fin controlador
+
 	}
