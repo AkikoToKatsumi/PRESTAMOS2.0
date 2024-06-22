@@ -41,8 +41,7 @@ class itemModelo extends mainModel {
 	   }
       /*__Modelo actualizar item__*/
 		protected static function actualizar_item_modelo($datos){
-			$sql=mainModel::conectar()->prepare("UPDATE item SET 
-			item_codigo =:Codigo,item_nombre=:Nombre, item_stock=
+			$sql=mainModel::conectar()->prepare("UPDATE item SET item_codigo =:Codigo,item_nombre=:Nombre, item_stock=
 			:Stock,item_estado=:Estado, item_detalle=:Detalle WHERE item_id=:ID");
 
 			$sql->bindParam(":Codigo",$datos['Codigo']);

@@ -329,7 +329,7 @@
 			$id=mainModel::decryption($id);
 			$id=mainModel::limpiar_cadena($id);
 
-			return clienteModelo::datos_ciente_modelo($tipo,$id);
+			return clienteModelo::datos_cliente_modelo($tipo,$id);
 		   }//fin controlador
 
 
@@ -361,8 +361,7 @@
         	$direccion=mainModel::limpiar_cadena($_POST['cliente_direccion_up']);
         
 			//comprobar campos vacios
-			if($dni=="" || $nombre=="" || $apellido=="" || $telefono=="" ||
-		 	$direccion== ""){
+			if($dni=="" || $nombre=="" || $apellido=="" || $telefono=="" || $direccion== ""){
 			$alerta=[
 				"Alerta"=>"simple",
 				"Titulo"=>"Ocurrió un error inesperado",
@@ -443,7 +442,7 @@
 			exit();
 		  		}
 	 		}	
-			
+
 		  // comprobar privillegios de admin
 		session_start(['name'=>'SPM']);
 		if($_SESSION['privilegio_spm']<1 || $_SESSION['privilegio_spm']>

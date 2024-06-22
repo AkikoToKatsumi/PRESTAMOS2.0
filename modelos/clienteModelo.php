@@ -28,7 +28,7 @@
 
 	   }
 	   /*__Modelo edatosclientes__*/
-	   protected static function datos_ciente_modelo($tipo, $id){
+	   protected static function datos_cliente_modelo($tipo, $id){
 		if($tipo=="Unico"){
 			$sql=mainModel::conectar()->prepare("SELECT * FROM cliente WHERE
 			 cliente_id =:ID");

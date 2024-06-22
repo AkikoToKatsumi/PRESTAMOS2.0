@@ -98,8 +98,7 @@
 		   exit();
 		}
 		 /**Comp codigos*/
-		 $check_nombre=mainModel::ejecutar_consulta_simple("SELECT 
-		 item_nombre FROM item WHERE item_nombre='$nombre'");
+		 $check_nombre=mainModel::ejecutar_consulta_simple("SELECT item_nombre FROM item WHERE item_nombre='$nombre'");
 		 if($check_nombre->rowCount()>0){
 			$alerta=[
 				"Alerta"=>"simple",
@@ -117,8 +116,8 @@
 		 "Estado"=>$estado,
 		 "Detalle"=>$detalle
 		];
-		$agregar_item=itemModelo::agregar_item_modelo($datos_item_reg);
 
+		$agregar_item=itemModelo::agregar_item_modelo($datos_item_reg);
 		if($agregar_item->rowCount()==1 ){
 			$alerta=[
 				"Alerta"=>"limpiar",
@@ -133,13 +132,11 @@
 				"Texto"=>"No hemos registrar el item",
 				"Tipo"=>"error"
 			];
-
 		}//vid72
 		echo json_encode($alerta); 
 	}/*fincontrolador*/
 /*--------- Controlador paginar items ---------*/
-public function paginador_item_controlador($pagina,$registros,$privilegio,
-$url,$busqueda){
+public function paginador_item_controlador($pagina,$registros,$privilegio,$url,$busqueda){
 
 	$pagina=mainModel::limpiar_cadena($pagina);
 	$registros=mainModel::limpiar_cadena($registros);
@@ -331,9 +328,9 @@ $url,$busqueda){
 			return itemModelo::datos_item_modelo($tipo,$id);
 		   }//fin controlador
 
-	           //controlador act c-iteem//
+	           //controlador act iteem//
 	public function actualizar_item_controlador(){
-		//recuoerar el id
+		//recuPerar el id
 		$id=mainModel::decryption($_POST['item_id_up']);
 		$id=mainModel::limpiar_cadena($id);
 
@@ -350,16 +347,16 @@ $url,$busqueda){
 			exit();
 	   }else{
 		$campos=$check_item->fetch();
-		}	  
+	   }
 		$codigo=mainModel::limpiar_cadena($_POST['item_codigo_up']);
 		$nombre=mainModel::limpiar_cadena($_POST['item_nombre_up']);
 		$stock=mainModel::limpiar_cadena($_POST['item_stock_up']);
 		$estado=mainModel::limpiar_cadena($_POST['item_estado_up']);
 		$detalle=mainModel::limpiar_cadena($_POST['item_detalle_up']);
-	
+	   
 	/*== comprobar campos vacios ==*/
 	if($codigo=="" || $nombre=="" ||$stock=="" || $estado==""){
-		$alerta=[
+			$alerta=[
 			"Alerta"=>"simple",
 			"Titulo"=>"Ocurrió un error inesperado",
 			"Texto"=>"No has llenado todos los campos que son obligatorios",
@@ -414,7 +411,6 @@ $url,$busqueda){
 		}
 
 	}
-
 	if($estado!="Habilitado" && $estado!= "Deshabilitado"){
 					$alerta=[
 					"Alerta"=>"simple",
