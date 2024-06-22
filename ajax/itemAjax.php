@@ -2,7 +2,7 @@
 	$peticionAjax=true;
 	require_once "../config/APP.php";
 
-	if(isset($_POST['item_codigo_reg']) || isset($_POST['item_id_del']) || isset($_POST['cliente_id_up'])){
+	if(isset($_POST['item_codigo_reg']) || isset($_POST['item_id_del']) || isset($_POST['item_id_up'])){
 
 		
 
