@@ -4,7 +4,7 @@
         /* ____Modelo Para obtener vistas____ */
         protected static function obtener_vistas_modelo ($vistas){
         $listaBlanca= ["home","client-list","client-new","client-search","client-update","company",
-        "item-list","item-new","item-search","item-update","reservation-list","resevation-new","reservation-pending",
+        "item-list","item-new","item-search","item-update","reservation-list","reservation-new","reservation-pending",
         "reservation-reservation","reservation-search","reservation-update","user-list","user-new",
         "user-search","user-update"];
         
