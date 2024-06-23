@@ -117,7 +117,7 @@
                 $alerta=[
                     "Alerta"=>"recargar",
                     "Titulo"=>"Cliente removido",
-                    "Texto"=>"Excito",
+                    "Texto"=>"Éxito",
                     "Tipo"=>"success"
                 ];
             }else{

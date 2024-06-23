@@ -49,8 +49,8 @@
                 </i> Seleccione un cliente</span>
                 <?php }else{?>
 
-      			<form class="FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamosAjax.php" 
-                method="POST" data-form=""loans 
+      			<form class="FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamoAjax.php" 
+                method="POST" data-form="loans" 
                 style="display: inline-block !important;">
                 <input type ="hidden" name="id_eliminar_cliente" value="<?php echo $_SESSION['datos_cliente']['ID'];?>">
                 	<?php echo $_SESSION['datos_cliente']['Nombre']." ".$_SESSION['datos_cliente']['Apellido']." (".$_SESSION['datos_cliente']['DNI'].")";?>
