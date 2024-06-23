@@ -27,7 +27,6 @@
         </li>
     </ul>
 </div>
-
 <div class="container-fluid">
 	<div class="container-fluid form-neon">
         <div class="container-fluid">
