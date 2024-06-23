@@ -278,49 +278,14 @@
                     </div>
                 </div>
                 <br>
-                <div class="container-fluid" id="tabla_items">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-bordered table-sm">
-                            <tbody>
-                                <tr class="text-center">
-                                    <td>000000000000 - Nombre del item</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-box-open"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td>000000000000 - Nombre del item</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-box-open"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td>000000000000 - Nombre del item</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-box-open"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td>000000000000 - Nombre del item</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-box-open"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="alert alert-warning" role="alert">
-                    <p class="text-center mb-0">
-                        <i class="fas fa-exclamation-triangle fa-2x"></i><br>
-                        No hemos encontrado ningún item en el sistema que coincida con <strong>“Busqueda”</strong>
-                    </p>
-                </div>
+                <div class="container-fluid" id="tabla_items"></div>                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar</button>
+                <button type="button" class="btn btn-primary" onclick="buscar_item()">
+                    <i class="fas fa-search fa-fw"></i> &nbsp; Buscar</button>
                 &nbsp; &nbsp;
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" 
+                data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -330,7 +295,8 @@
 <!-- MODAL AGREGAR ITEM -->
 <div class="modal fade" id="ModalAgregarItem" tabindex="-1" role="dialog" aria-labelledby="ModalAgregarItem" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="modal-content FormularioAjax">
+
+        <form class="modal-content FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamoAjax.php" method="POST" data-form="default" autocomplete="off">
             <div class="modal-header">
                 <h5 class="modal-title" id="ModalAgregarItem">Selecciona el formato, cantidad de items, tiempo y costo del préstamo del item</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -376,7 +342,7 @@
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" >Agregar</button>
                 &nbsp; &nbsp;
-                <button type="button" class="btn btn-secondary" >Cancelar</button>
+                <button type="button" class="btn btn-secondary" onclick="modal_buscar_item()">Cancelar</button>
             </div>
         </form>
     </div>

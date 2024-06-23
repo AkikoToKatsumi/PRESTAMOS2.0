@@ -156,14 +156,14 @@
 					$consulta="SELECT SQL_CALC_FOUND_ROWS * FROM cliente
 					  ORDER BY cliente_nombre ASC LIMIT $inicio,$registros";
 				}
-	//conect a la DB para 
+				//conect a la DB para 
 				$conexion = mainModel::conectar();
-	//almacenar datos desde la DB
+				//almacenar datos desde la DB
 				$datos = $conexion->query($consulta);
 				$datos = $datos->fetchAll(); 
 				$total = $conexion->query("SELECT FOUND_ROWS()");
 				$total = (int) $total->fetchColumn();
-	//contar el # pag totales en la DB o registros x pag
+				//contar el # pag totales en la DB o registros x pag
 				$Npaginas=ceil($total/$registros);
 		
 				$tabla.='<div class="table-responsive">
