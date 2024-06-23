@@ -94,7 +94,7 @@ input_cliente=input_cliente.trim();
     function modal_agregar_item(id){
         $('#ModalItem').modal('hide');
         $('#ModalAgregarItem').modal('show');
-        document.querySelector('#id_agregar_item').setAttribute("value",id);
+        document.querySelector('#id_agregar_item').setAttribute("value", id);
     }
 
     function modal_buscar_item(){
