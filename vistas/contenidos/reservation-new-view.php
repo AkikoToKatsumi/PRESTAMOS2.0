@@ -33,16 +33,31 @@
         <div class="container-fluid">
             <p class="text-center roboto-medium">AGREGAR CLIENTE O ITEMS</p>
             <p class="text-center">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCliente"><i class="fas fa-user-plus"></i> &nbsp; Agregar cliente</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalItem"><i class="fas fa-box-open"></i> &nbsp; Agregar item</button>
+                <?php if(empty($_SESSION['datos_cliente'])){?>
+                <button type="button" class="btn btn-primary" data-toggle="modal" 
+                data-target="#ModalCliente"><i class="fas fa-user-plus"></i> &nbsp; 
+                Agregar cliente</button>
+                <?php }?>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                 data-target="#ModalItem"><i class="fas fa-box-open"></i> &nbsp; Agregar item</button>
             </p>
             <div>
                 <span class="roboto-medium">CLIENTE:</span> 
-                <span class="text-danger">&nbsp; <i class="fas fa-exclamation-triangle"></i> Seleccione un cliente</span>
-      			<form action="" style="display: inline-block !important;">
-                	Carlos Alfaro
-                    <button type="button" class="btn btn-danger"><i class="fas fa-user-times"></i></button>
+                <?php if(empty($_SESSION['datos_cliente'])){ ?>
+                <span class="text-danger">&nbsp; <i class="fas fa-exclamation-triangle">
+                </i> Seleccione un cliente</span>
+                <?php }else{?>
+
+      			<form class="FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamosAjax.php" 
+                method="POST" data-form=""loans 
+                style="display: inline-block !important;">
+                <input type ="hidden" name="id_eliminar_cliente" value="<?php echo $_SESSION['datos_cliente']['ID'];?>">
+                	<?php echo $_SESSION['datos_cliente']['Nombre']." ".$_SESSION['datos_cliente']['Apellido']." (".$_SESSION['datos_cliente']['DNI'].")";?>
+                    <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-user-times"></i></button>
                 </form>
+                <?php } ?>
             </div>
             <div class="table-responsive">
                 <table class="table table-sm">
@@ -230,38 +245,10 @@
                     </div>
                 </div>
                 <br>
-                <div class="container-fluid" id="tabla_clientes">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-bordered table-sm">
-                            <tbody>
-                                <tr class="text-center">
-                                    <td>0000000000 - Nombre del cliente</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-user-plus"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td>0000000000 - Nombre del cliente</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-user-plus"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td>0000000000 - Nombre del cliente</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-user-plus"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+               <div class="container-fluid" id="tabla_clientes">
+                             
                 </div>
-                <div class="alert alert-warning" role="alert">
-                    <p class="text-center mb-0">
-                        <i class="fas fa-exclamation-triangle fa-2x"></i><br>
-                        No hemos encontrado ningún cliente en el sistema que coincida con <strong>“Busqueda”</strong>
-                    </p>
-                </div>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="buscar_cliente()"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar</button>
