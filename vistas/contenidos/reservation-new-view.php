@@ -250,7 +250,7 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="buscar_cliente()"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar</button>
+                <button type="button" class="btn btn-primary"  onclick="buscar_cliente()"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar</button>
                 &nbsp; &nbsp;
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
@@ -294,11 +294,11 @@
 <!-- MODAL AGREGAR ITEM -->
 <div class="modal fade" id="ModalAgregarItem" tabindex="-1" role="dialog" aria-labelledby="ModalAgregarItem" aria-hidden="true">
     <div class="modal-dialog" role="document">
-
-        <form class="modal-content FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamoAjax.php" method="POST" data-form="default" autocomplete="off">
+        <form class="modal-content FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamoAjax.php" method="POST" data-bs-form="default" autocomplete="off">
+            
             <div class="modal-header">
                 <h5 class="modal-title" id="ModalAgregarItem">Selecciona el formato, cantidad de items, tiempo y costo del préstamo del item</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -339,7 +339,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" >Agregar</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Agregar</button>
                 &nbsp; &nbsp;
                 <button type="button" class="btn btn-secondary" onclick="modal_buscar_item()">Cancelar</button>
             </div>

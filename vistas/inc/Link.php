@@ -3,9 +3,9 @@
 
         <!-- Bootstrap V4.3 -->
         <link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/bootstrap.min.css">
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <!-- Bootstrap Material Design V4.0 -->
-        <link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/bootstrap-material-desing.min.css">
+        <link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/bootstrap-material-design.min.css">
 
         <!-- Font Awesome V5.9.0 -->
         <link rel= "stylesheet" href="<?php echo SERVERURL; ?>vistas/css/all.css">

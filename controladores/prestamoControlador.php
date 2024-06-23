@@ -38,7 +38,7 @@
                                         <td>'.$rows['cliente_nombre'].' '.$rows['cliente_apellido'].'
                                         - '.$rows['cliente_dni'].'</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" onclick="agregar_cliente('.$rows['cliente_id'].')">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="agregar_cliente('.$rows['cliente_id'].')">
                                             <i class="fas fa-user-plus"></i></button>
                                         </td>
                                     </tr>';
@@ -162,6 +162,7 @@
                                         <td>
                                             <button type="button" class="btn
                                              btn-primary"
+                                             data-dismiss="modal"
                                              onclick="modal_agregar_item('.$rows['item_id'].')" ><i
                                              class="fas 
                                              fa-box-open"></i></button>
