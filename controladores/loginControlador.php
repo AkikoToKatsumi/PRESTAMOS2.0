@@ -41,10 +41,7 @@
 				</script>
 				';
 				exit();
-
-				
 			}
-
 			if(mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave)){
 				echo '
 				<script>
@@ -58,19 +55,16 @@
 				';
 				exit();
 			}
-
 			$clave=mainModel::encryption($clave);
 
 			$datos_login=[
 				"Usuario"=>$usuario,
 				"Clave"=>$clave
 			];
-
 			$datos_cuenta=loginModelo::iniciar_sesion_modelo($datos_login);
 //video26 iniciar sec ccontrolador
 			if($datos_cuenta->rowCount()==1){
 				$row=$datos_cuenta->fetch();
-
 				session_start(['name'=>'SPM']);
 
 				$_SESSION['id_spm']=$row['usuario_id'];
@@ -94,8 +88,6 @@
 			}
 		} /* Fin controlador */
 
-
-
 		/*--------- Controlador forzar cierre de sesion ---------*/
 		public function forzar_cierre_sesion_controlador(){
 			session_unset();
@@ -106,7 +98,6 @@
 				return header("Location: ".SERVERURL."login/");
 			}
 		} /* Fin controlador */
-
 
 		/*--------- Controlador cierre de sesion ---------*/
 		public function cerrar_sesion_controlador(){
@@ -129,7 +120,6 @@
 					"Tipo"=>"error"
 				];
 			}
-			
 			echo json_encode($alerta);
 		} /* Fin controlador */
 	}
