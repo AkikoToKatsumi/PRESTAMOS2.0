@@ -12,5 +12,4 @@
 			$sql->execute();
 			return $sql;
 		}
-		
 	}

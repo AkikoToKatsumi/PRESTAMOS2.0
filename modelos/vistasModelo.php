@@ -14,11 +14,11 @@
             }else{
          }
 
-        }else if($vistas=="login" || $vistas=="index"){
-            $contenido="login";
-         }else{
-            $contenido="404";
-         }
-         return $contenido;
-        }
-    }
+      }else if($vistas=="login" || $vistas=="index"){
+         $contenido="login";
+      }else{
+         $contenido="404";
+      }
+      return $contenido;
+     }
+ }

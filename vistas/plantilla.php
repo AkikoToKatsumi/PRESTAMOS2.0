@@ -56,29 +56,29 @@ class="light-style layout-menu-fixed"
 
 
 
-	<?php
+<?php
 
-	$peticionAjax=false;
-	require_once "./controladores/vistasControlador.php";
-	$IV = new vistasControlador();
-    
-     $vistas = $IV-> obtener_vistas_controlador();
-	 //condicional para detectar login
-     if ($vistas=="login" || $vistas=="404"){
-		require_once "./vistas/contenidos/".$vistas."-view.php";
+$peticionAjax=false;
+require_once "./controladores/vistasControlador.php";
+$IV = new vistasControlador();
+  
+   $vistas = $IV-> obtener_vistas_controlador();
+ //condicional para detectar login
 
-	 }else{session_start(['name'=>'SPM']);
-    $pagina=explode("/", $_GET['views']);
+   if ($vistas=="login" || $vistas=="404"){
+  require_once "./vistas/contenidos/".$vistas."-view.php";
 
-        require_once"./controladores/loginControlador.php";
-        $lc = new loginControlador();
+ }else{session_start(['name'=>'SPM']);
 
-        if(!isset($_SESSION['token_spm']) || !isset($_SESSION['usuario_spm']) ||
-        !isset($_SESSION['privilegio_spm']) || !isset($_SESSION['id_spm']) ){
+      require_once"./controladores/loginControlador.php";
+      $lc = new loginControlador();
+
+      if(!isset($_SESSION['token_spm']) || !isset($_SESSION['usuario_spm']) ||
+      !isset($_SESSION['privilegio_spm']) || !isset($_SESSION['id_spm']) ){
 echo $lc->forzar_cierre_sesion_controlador() ;
 exit();
-        }
-	?>
+      }
+?>
 
 
 		<?php include "./vistas/inc/NavLateral.php"; ?>
