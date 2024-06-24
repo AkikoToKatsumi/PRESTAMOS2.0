@@ -25,9 +25,7 @@ input_cliente=input_cliente.trim();
                 type: 'error',
                 confirmButtonText: 'Aceptar'
             });
-
     }
-
     }
     // agg cliente
     function agregar_cliente(id){
@@ -89,7 +87,6 @@ input_cliente=input_cliente.trim();
                });
        } 
     }
-
     // modales de los items
     function modal_agregar_item(id){
         $('#ModalItem').modal('hide');
