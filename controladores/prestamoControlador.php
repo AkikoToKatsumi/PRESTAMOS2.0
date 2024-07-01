@@ -898,7 +898,133 @@
 		  echo json_encode($alerta);
 		  exit();
 		  }
-          
-        
+          //calculando total a pagar
+          $total_pagado=number_format(($monto+$datos_prestamo['prestamo_pagado']),2,'.','');
+
+          $fecha=date("Y-m-d");
+
+          $datos_pago_reg=[
+            "Total"=>$monto,
+            "Fecha"=>$fecha,
+            "Codigo"=>$codigo
+          ];
+
+          $agregar_pago=prestamoModelo::agregar_pago_modelo($datos_pago_reg);
+          if($agregar_pago->rowCount()==1){
+            
+            $datos_prestamo_up=[
+                "Tipo"=>"Pago",
+                "Monto"=>$total_pagado,
+                "Codigo"=>$codigo
+            ];
+
+            if(prestamoModelo::actualizar_prestamo_modelo($datos_prestamo_up)){
+            $alerta=[
+                "Alerta"=>"recargar",
+                "Titulo"=>"Pago realizado",
+                "Texto"=> "El pago de ".MONEDA.$monto."se ha realizado",
+                "Tipo"=>"success"
+            ];
+        }else{
+            prestamoModelo::eliminar_prestamo_modelo($codigo,"Pago");
+            $alerta=[
+                "Alerta"=>"simple",
+                "Titulo"=>"Ocurrio un error inesperado",
+                "Texto"=> "El monto que acaba de ingresar supera el saldo pendiente que tiene en este prestamo",
+                "Tipo"=>"error"
+            ];
+          }
+        }else{
+            $alerta=[
+                "Alerta"=>"simple",
+                "Titulo"=>"Ocurrio un error inesperado",
+                "Texto"=> "El monto que acaba de ingresar supera el saldo pendiente que tiene en este prestamo",
+                "Tipo"=>"error"
+            ];
+        }
+          echo json_encode($alerta);
       }//find contr
-} 
+
+      //controlador actualizar prestamos
+      public function actualizar_prestamo_controlador(){
+        //rec datos
+        $codigo=mainModel::decryption($_POST['prestamo_codigo_up']);
+        $codigo=mainModel::limpiar_cadena($codigo);
+
+        //comprobando prestamo en la db
+      $check_prestamo=mainModel::ejecutar_consulta_simple("SELECT prestamo_codigo FROM prestamo WHERE prestamo_codigo='$codigo'");
+      if($check_prestamo->rowCount()<=0){
+        $alerta=[
+            "Alerta"=>"simple",
+            "Titulo"=>"Ocurrió un error inesperado",
+            "Texto"=>"El prestamo que quiere actualizar no existe en el sistema",
+            "Tipo"=>"error"
+        ];
+        echo json_encode($alerta);
+        exit();
+      }
+
+      //recibir datos
+      $estado=mainModel::limpiar_cadena($_POST['prestamo_estado_up']);
+      $observacion=mainModel::limpiar_cadena($_POST['prestamo_observacion_up']);
+
+      //Verf integ datos
+      if($observacion!=""){
+      if(mainModel::verificar_datos("[a-zA-z0-9áéíóúÁÉÍÓÚñÑ#()]{1,400}",$observacion)){
+        $alerta=[
+            "Alerta"=>"simple",
+            "Titulo"=>"Ocurrió un error inesperado",
+            "Texto"=>"El prestamo que quiere actualizar no existe en el sistema",
+            "Tipo"=>"error"
+        ];
+        echo json_encode($alerta);
+        exit();
+         }
+       }
+       if($estado!="Reservacion" && $estado!="Prestamo" && $estado!="Finalizado"){
+        $alerta=[
+            "Alerta"=>"simple",
+            "Titulo"=>"Ocurrió un error inesperado",
+            "Texto"=>"El prestamo que quiere actualizar no existe en el sistema",
+            "Tipo"=>"error"
+        ];
+        echo json_encode($alerta);
+        exit();
+       }
+       //ccmprobar privilegios 
+		  session_start(['name'=>'SPM']);
+		  if($_SESSION['privilegio_spm']!=1){
+			  $alerta=[
+				  "Alerta"=>"simple",
+				  "Titulo"=>"Ocurrio un error",
+				  "Texto"=> "No tienes los permisos para realizar esta acción",
+				  "Tipo"=>"error"
+			  ];
+		  echo json_encode($alerta);
+		  exit();
+		  }
+        $datos_prestamo_up=[
+            "Tipo"=>"Prestamo",
+            "Estado"=>$estado,
+            "Observacion"=>$observacion,
+            "Codigo"=>$codigo
+        ];
+        if(prestamoModelo::actualizar_prestamo_modelo($datos_prestamo_up)){
+            $alerta=[
+                "Alerta"=>"recargar",
+                "Titulo"=>"Prestamo actualizado",
+                "Texto"=> "",
+                "Tipo"=>"success"
+            ];
+        }else{
+            $alerta=[
+                "Alerta"=>"simple",
+                "Titulo"=>"Ocurrio un error",
+                "Texto"=> "No hemos podido actualizar el prestamo",
+                "Tipo"=>"error"
+            ];
+
+        }
+        echo json_encode($alerta);
+    }
+}

@@ -4,7 +4,7 @@
 
 	if(isset($_POST['buscar_cliente']) || isset($_POST['id_agregar_cliente']) || isset($_POST['id_eliminar_cliente']) 
 	|| isset($_POST['buscar_item']) || isset($_POST['id_agregar_item']) || isset($_POST['id_eliminar_item']) || isset($_POST['prestamo_fecha_inicio_reg']) 
-	|| isset($_POST['prestamo_codigo_del']) || isset($_POST['pago_codigo_reg']) ){
+	|| isset($_POST['prestamo_codigo_del']) || isset($_POST['pago_codigo_reg']) || isset($_POST['prestamo_codigo_up'])){
 
 		/*--------- Instancia al controlador ---------*/
 		require_once "../controladores/prestamoControlador.php";
@@ -49,6 +49,11 @@
 		// agregar pago
 		if(isset($_POST['pago_codigo_reg'])){
 			echo $ins_prestamo->agregar_pago_controlador();
+			}
+
+		// actualizar prestamo
+		if(isset($_POST['prestamo_codigo_up'])){
+			echo $ins_prestamo->actualizar_prestamo_controlador();
 			}
 
 
