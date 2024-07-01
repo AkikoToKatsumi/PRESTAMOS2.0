@@ -71,21 +71,59 @@
                             <th>ELIMINAR</th>
                         </tr>
                     </thead>
-                   
+                    
                         <?php
                         if(isset($_SESSION['datos_item']) && count($_SESSION['datos_item'])>=1){
+                            
+                            $_SESSION['prestamo_total']=0;
+                            $_SESSION['prestamo_item']=0;
 
+                            foreach($_SESSION['datos_item'] as $items){
+                                $subtotal=$items['Cantidad']*($items['Costo']*$items['Tiempo']);
+                                $subtotal=number_format($subtotal,2,'.','');
+
+
+                        ?>
+                         <tr class="text-center" >
+                            <td><?php echo $items['Nombre']; ?></td>
+                            <td><?php echo $items['Cantidad']; ?></td>
+                            <td><?php echo $items['Tiempo']." ".$items['Formato']; ?></td>
+                            <td><?php echo MONEDA.$items['Costo']." x 1 ".$items['Formato']; ?></td>
+                            <td><?php echo MONEDA.$subtotal; ?></td>
+                            <td>
+                                <button type="button" class="btn btn-info" data-toggle="popover" data-trigger="hover" title="<?php echo $items['Detalle']; ?>" 
+                                data-content="<?php echo $items['Detalle']; ?>">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <form class="FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamoAjax.php" method="POST" data-form="loans" autocomplete="off">
+                                    <input type="hidden" name="id_eliminar_item" value="<?php echo $items['ID'] ?> ">
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+
+                        <?php
+                            $_SESSION['prestamo_total']+=$subtotal;
+                            $_SESSION['prestamo_item']+=$items['Cantidad'];
+                        }
                         ?>
                         
                         <tr class="text-center bg-light">
                             <td><strong>TOTAL</strong></td>
-                            <td><strong>21 items</strong></td>
+                            <td><strong><?php echo   $_SESSION['prestamo_item']; ?> Items</strong></td>
                             <td colspan="2"></td>
-                            <td><strong>$130.00</strong></td>
+                            <td><strong><?php echo   MONEDA.number_format($_SESSION['prestamo_total'],2,'.',''); ?></strong></td>
                             <td colspan="2"></td>
                         </tr>
                         <?php
                         }else{
+                            $_SESSION['prestamo_total']=0;
+                            $_SESSION['prestamo_item']=0;
                         ?>
                          <tr class="text-center" >
                             <td coldspan="7">No has seleccionado items</td>
@@ -98,7 +136,7 @@
                 </table>
             </div>
         </div>
-		<form action="" autocomplete="off">
+		<form class="FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamoAjax.php" method="POST" data-form="save" autocomplete="off">
             <fieldset>
                 <legend><i class="far fa-clock"></i> &nbsp; Fecha y hora de préstamo</legend>
                 <div class="container-fluid">
@@ -106,13 +144,13 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="prestamo_fecha_inicio">Fecha de préstamo</label>
-                                <input type="date" class="form-control" name="prestamo_fecha_inicio_reg" id="prestamo_fecha_inicio">
+                                <input type="date" class="form-control" name="prestamo_fecha_inicio_reg" value="<?php echo date("Y-m-d");?>" id="prestamo_fecha_inicio">
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="prestamo_hora_inicio">Hora de préstamo</label>
-                                <input type="time" class="form-control" name="prestamo_hora_inicio_reg" id="prestamo_hora_inicio">
+                                <input type="time" class="form-control" name="prestamo_hora_inicio_reg" value="<?php echo date("H:i");?>" id="prestamo_hora_inicio">
                             </div>
                         </div>
                     </div>
@@ -145,7 +183,7 @@
                             <div class="form-group">
                                 <label for="prestamo_estado" class="bmd-label-floating">Estado</label>
                                 <select class="form-control" name="prestamo_estado_reg" id="prestamo_estado">
-                                    <option value="" selected="" disabled="">Seleccione una opción</option>
+                                    <option value="" selected="" >Seleccione una opción</option>
                                     <option value="Reservacion">Reservación</option>
                                     <option value="Prestamo">Préstamo</option>
                                     <option value="Finalizado">Finalizado</option>
@@ -154,13 +192,13 @@
                         </div>
 						<div class="col-12 col-md-4">
 							<div class="form-group">
-								<label for="prestamo_total" class="bmd-label-floating">Total a pagar en $</label>
-                                <input type="text" pattern="[0-9.]{1,10}" class="form-control" readonly="" value="100.00" id="prestamo_total" maxlength="10">
+								<label for="prestamo_total" class="bmd-label-floating">Total a pagar en <?php echo MONEDA; ?></label>
+                                <input type="text" pattern="[0-9.]{1,10}" class="form-control" readonly="" value="<?php echo  number_format($_SESSION['prestamo_total'],2,'.',''); ?>" id="prestamo_total" maxlength="10">
 							</div>
 						</div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
-                                <label for="prestamo_pagado" class="bmd-label-floating">Total depositado en $</label>
+                                <label for="prestamo_pagado" class="bmd-label-floating">Total depositado en <?php echo MONEDA; ?></label>
                                 <input type="text" pattern="[0-9.]{1,10}" class="form-control" name="prestamo_pagado_reg" id="prestamo_pagado" maxlength="10">
                             </div>
                         </div>

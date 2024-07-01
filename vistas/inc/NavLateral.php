@@ -78,7 +78,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="<?php echo SERVERURL; ?>item-list" class="menu-link">
+                  <a href="<?php echo SERVERURL; ?>item-search/" class="menu-link">
                     <div data-i18n="Connections">Buscar Item</div>
                   </a>
                 </li>

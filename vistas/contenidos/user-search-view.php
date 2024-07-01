@@ -22,7 +22,7 @@
 						<a href="<?php echo SERVERURL ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS</a>
 					</li>
 					<li>
-						<a class="<?php echo SERVERURL ?>active" href="user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO</a>
+						<a class="active" href="<?php echo SERVERURL ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO</a>
 					</li>
 				</ul>	
 			</div>

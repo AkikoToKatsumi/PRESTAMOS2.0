@@ -16,7 +16,8 @@
                         <a href="<?php echo SERVERURL; ?>item-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS</a>
                     </li>
                     <li>
-                        <a class="<?php echo SERVERURL; ?>active" href="item-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM</a>
+                        <a class="active" href="<?php echo SERVERURL; ?>item-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM</a>
+                        
                     </li>
                 </ul>
             </div>

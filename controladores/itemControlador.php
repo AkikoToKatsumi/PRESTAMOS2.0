@@ -203,7 +203,7 @@ public function paginador_item_controlador($pagina,$registros,$privilegio,$url,$
 				<td>'.$rows['item_stock'].'</td>
 				<td>'.$rows['item_estado'].'</td>
 				<td><button type="button" class="btn btn-info"
-				data-toggle="popover" data-trigger="hover" title="'.$rows['item_nombre'].'"data-content="'.$rows['item_detalle'].'">
+				data-toggle="popover" data-trigger="hover" title="'.$rows['item_detalle'].'">
 							<i class="fas fa-info-circle"></i>
 						</button></td>';
 
