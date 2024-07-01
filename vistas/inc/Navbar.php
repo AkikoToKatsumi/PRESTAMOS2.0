@@ -29,7 +29,7 @@
                 <li class="nav-item lh-1 me-3">
                   <a
                    
-                    >INFO DESAROLLADORA</a
+                    >---</a
                   >
                 </li>
 
