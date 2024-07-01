@@ -34,19 +34,48 @@
             </div>
 
             <div class="container-fluid">
+            <?php 
+				require_once "./controladores/prestamoControlador.php";
 
+				$ins_prestamo= new prestamoControlador();
+
+				$datos_prestamo=$ins_prestamo->datos_prestamo_controlador("Unico",$pagina[1]);
+			if($datos_prestamo->rowCount()==1){
+				$campos=$datos_prestamo->fetch();
+                if ($campos['prestamo_estado']=="Finalizado" && $campos["prestamo_pagado"]==$campos['prestamo_total']) {
+                    
+                
+				?>
+                 <div class="alert alert-danger text-center" role="alert">
+                    <p><i class="fas fa-exclamation-triangle fa-5x"></i></p>
+                    <h4 class="alert-heading">¡Ocurrió un error inesperado!</h4>
+                    <p class="mb-0">Lo sentimos, no podemos actualizar el prestamo debido a que ya se encuentra cancelado.</p>
+                </div>
+                <?php 
+                }else { ?>
+                <?php if($campos["prestamo_pagado"]!=$campos['prestamo_total']){  ?>
                 <div class="container-fluid form-neon">
                     <div class="container-fluid">
                         <p class="text-center roboto-medium">AGREGAR NUEVO PAGO A ESTE PRÉSTAMO</p>
-                        <p class="text-center">Este préstamo presenta un pago pendiente por la cantidad de <strong>$50</strong>, puede agregar un pago a este préstamo haciendo clic en el siguiente botón.</p>
+                        <p class="text-center">Este préstamo presenta un pago pendiente por la cantidad de 
+                            <strong><?php echo MONEDA.number_format(($campos['prestamo_total']-$campos["prestamo_pagado"]),2,'.',''); ?></strong>, puede agregar un pago a este préstamo haciendo clic en el siguiente botón.</p>
                         <p class="text-center">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPago"><i class="far fa-money-bill-alt"></i> &nbsp; Agregar pago</button>
                         </p>
                     </div>
+                    <?php } ?>
                     <div class="container-fluid">
                         <div>
                             <span class="roboto-medium">CLIENTE:</span> 
-                            &nbsp; Carlos Alfaro
+                            <?php 
+                                require_once "./controladores/clienteControlador.php";
+                                $ins_cliente= new clienteControlador();
+                                $datos_cliente=$ins_cliente->datos_cliente_controlador("Unico",$lc->encryption($campos['cliente_id'])); 
+                                $datos_cliente=$datos_cliente->fetch();
+
+                               
+                            ?>
+                            &nbsp; <?php echo $datos_cliente['cliente_nombre']." ".$datos_cliente['cliente_apellido'];  ?>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-sm">
@@ -60,32 +89,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php 
+                                        $datos_detalle=$ins_prestamo->datos_prestamo_controlador("Detalle",$lc->encryption($campos['prestamo_codigo']));
+                                        $datos_detalle=$datos_detalle->fetchAll();
+                                        foreach ($datos_detalle as $items) {
+                                            $subtotal=$items['detalle_cantidad']*($items['detalle_costo_tiempo']*$items['detalle_tiempo']);
+                                            $subtotal=number_format($subtotal,2,'.','');
+                                        }
+                                    ?>
                                     <tr class="text-center" >
-                                        <td>Silla plastica</td>
-                                        <td>7</td>
-                                        <td>Hora</td>
-                                        <td>$5.00</td>
-                                        <td>$35.00</td>
-                                    </tr>
-                                    <tr class="text-center" >
-                                        <td>Silla metalica</td>
-                                        <td>9</td>
-                                        <td>Día</td>
-                                        <td>$5.00</td>
-                                        <td>$45.00</td>
-                                    </tr>
-                                    <tr class="text-center" >
-                                        <td>Mesa plastica</td>
-                                        <td>5</td>
-                                        <td>Evento</td>
-                                        <td>$10.00</td>
-                                        <td>$50.00</td>
+                                        <td><?php echo $items['detalle_descripcion']; ?></td>
+                                        <td><?php echo $items['detalle_cantidad']; ?></td>
+                                        <td><?php echo $items['detalle_tiempo']." ".$items['detalle_formato']; ?></td>
+                                        <td><?php echo MONEDA.$items['detalle_costo_tiempo']." x 1 ".$items['detalle_formato']; ?></td>
+                                        <td><?php echo MONEDA.$subtotal; ?></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <form action="" autocomplete="off">
+                    <form class="FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamoAjax.php" 
+                    method="POST" data-form="update" autocomplete="off">
+                    <input type="hidden" name="prestamo_codigo_up" value="<?php echo $lc->encryption($campos['prestamo_codigo']); ?>">
                         <fieldset>
                             <legend><i class="far fa-clock"></i> &nbsp; Fecha y hora de préstamo</legend>
                             <div class="container-fluid">
@@ -93,13 +118,13 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="prestamo_fecha_inicio">Fecha de préstamo</label>
-                                            <input type="date" class="form-control" readonly="" id="prestamo_fecha_inicio">
+                                            <input type="date" class="form-control" readonly="" value="<?php echo $campos['prestamo_fecha_inicio']; ?>" id="prestamo_fecha_inicio">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="prestamo_hora_inicio">Hora de préstamo</label>
-                                            <input type="text" class="form-control" readonly="" id="prestamo_hora_inicio">
+                                            <input type="text" value="<?php echo $campos['prestamo_hora_inicio']; ?>" class="form-control" readonly="" id="prestamo_hora_inicio">
                                         </div>
                                     </div>
                                 </div>
@@ -112,13 +137,13 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="prestamo_fecha_final">Fecha de entrega</label>
-                                            <input type="date" class="form-control" readonly="" id="prestamo_fecha_final">
+                                            <input type="date" class="form-control" value="<?php echo $campos['prestamo_fecha_final']; ?>" readonly="" id="prestamo_fecha_final">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="prestamo_hora_final">Hora de entrega</label>
-                                            <input type="text" class="form-control" readonly="" id="prestamo_hora_final">
+                                            <input type="text" class="form-control" value="<?php echo $campos['prestamo_hora_final']; ?>" readonly="" id="prestamo_hora_final">
                                         </div>
                                     </div>
                                 </div>
@@ -132,28 +157,36 @@
                                         <div class="form-group">
                                             <label for="prestamo_estado" class="bmd-label-floating">*** Estado ***</label>
                                             <select class="form-control" name="prestamo_estado_up" id="prestamo_estado">
-                                                <option value="Reservacion">Reservación</option>
-                                                <option value="Prestamo">Préstamo</option>
-                                                <option value="Finalizado">Finalizado</option>
+                                                <option value="Reservacion" <?php if ($campos['prestamo_estado']=="Reservacion") {
+                                                   echo 'selected=""';} ?>>Reservación <?php if ($campos['prestamo_estado']=="Reservacion") {
+                                                    echo '(Actual)';} ?></option>
+
+                                                <option value="Prestamo" <?php if ($campos['prestamo_estado']=="Prestamo") {
+                                                   echo 'selected=""';} ?>>Préstamo <?php if ($campos['prestamo_estado']=="Prestamo") {
+                                                    echo '(Actual)';} ?></option>
+
+                                                <option value="Finalizado" <?php if ($campos['prestamo_estado']=="Finalizado") {
+                                                   echo 'selected=""';} ?>>Finalizado <?php if ($campos['prestamo_estado']=="Finalizado") {
+                                                    echo '(Actual)';} ?></option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
-                                            <label for="prestamo_total" class="bmd-label-floating">Total a pagar en $</label>
-                                            <input type="text" pattern="[0-9.]{1,10}" class="form-control" readonly="" value="100.00" id="prestamo_total" maxlength="10">
+                                            <label for="prestamo_total" class="bmd-label-floating">Total a pagar en <?php MONEDA; ?></label>
+                                            <input type="text" pattern="[0-9.]{1,10}" class="form-control" readonly="" value="<?php echo $campos['prestamo_total']; ?>" id="prestamo_total" maxlength="10">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
-                                            <label for="prestamo_pagado" class="bmd-label-floating">Total depositado en $</label>
-                                            <input type="text" pattern="[0-9.]{1,10}" class="form-control" readonly="" value="100.00" id="prestamo_pagado" maxlength="10">
+                                            <label for="prestamo_pagado" class="bmd-label-floating">Total depositado en <?php MONEDA; ?></label>
+                                            <input type="text" pattern="[0-9.]{1,10}" class="form-control" readonly="" value="<?php echo $campos['prestamo_pagado']; ?>" id="prestamo_pagado" maxlength="10">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="prestamo_observacion" class="bmd-label-floating">*** Observación ***</label>
-                                            <input type="text" pattern="[a-zA-z0-9áéíóúÁÉÍÓÚñÑ#() ]{1,400}" class="form-control" name="prestamo_observacion_up" id="prestamo_observacion" maxlength="400">
+                                            <input type="text" pattern="[a-zA-z0-9áéíóúÁÉÍÓÚñÑ#() ]{1,400}" class="form-control" name="prestamo_observacion_up" value="<?php echo $campos['prestamo_observacion']; ?>" id="prestamo_observacion" maxlength="400">
                                         </div>
                                     </div>
                                 </div>
@@ -167,9 +200,10 @@
                 </div>
 
                 <!-- MODAL PAGOS -->
-                <div class="modal fade" id="ModalPago" tabindex="-1" role="dialog" aria-labelledby="ModalPago" aria-hidden="true">
+                <div class="modal fade" id="ModalPago" tabindex="-1" role="dialog" aria-labelledby="ModalPago" aria-hidden="true" style="z-index: 1600">
                     <div class="modal-dialog" role="document">
-                        <form class="modal-content">
+                        <form class="modal-content FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamoAjax.php" 
+                    method="POST" data-form="save" autocomplete="off">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="ModalPago">Agregar pago</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -186,34 +220,58 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php  
+                                                $datos_pago=$ins_prestamo->datos_prestamo_controlador("Pago",$lc->encryption($campos['prestamo_codigo']));
+
+                                                if ($datos_pago->rowCount()>0) {
+                                                    $datos_pago=$datos_pago->fetchAll();
+                                                    foreach ($datos_pago as $pagos) {
+                                                      echo '
+                                                        <tr class="text-center">
+                                                        <td>'.date("d-m-Y",strtotime($pagos['pago_fecha'])).'</td>
+                                                        <td>'.MONEDA.$pagos['pago_total'].'</td>
+                                               
+                                                         </tr>
+                                                      ';
+
+                                                    }
+                                                    
+                                                }else {
+
+                                            ?>
                                             <tr class="text-center">
-                                                <td>Fecha</td>
-                                                <td>Monto</td>
+                                                <td colspan="2">No hay pagos registrados</td>
+                                               
                                             </tr>
+                                            <?php  } ?>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="container-fluid">
-                                    <input type="hidden" name="pago_codigo_reg">
+                                    <input type="hidden" name="pago_codigo_reg" value="<?php echo $lc->encryption($campos['prestamo_codigo']); ?>">
                                     <div class="form-group">
-                                        <label for="pago_monto_reg" class="bmd-label-floating">Monto en $</label>
+                                        <label for="pago_monto_reg" class="bmd-label-floating">Monto en <?php MONEDA; ?> </label>
                                         <input type="text" pattern="[0-9.]{1,10}" class="form-control" name="pago_monto_reg" id="pago_monto_reg" maxlength="10" required="">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-raised btn-info btn-sm" >Agregar pago</button> &nbsp;&nbsp; 
+                                <button type="submit" class="btn btn-raised btn-info btn-sm" >Agregar pago</button > &nbsp;&nbsp; 
                                 <button type="button" class="btn btn-raised btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
                             </div>
                         </form>
                     </div>
                 </div>
+                <?php }
+                    }else{ ?>
 
                 <div class="alert alert-danger text-center" role="alert">
                     <p><i class="fas fa-exclamation-triangle fa-5x"></i></p>
                     <h4 class="alert-heading">¡Ocurrió un error inesperado!</h4>
                     <p class="mb-0">Lo sentimos, no podemos mostrar la información solicitada debido a un error.</p>
                 </div>
+                <?php } ?>
     
             </div>
+ 
 

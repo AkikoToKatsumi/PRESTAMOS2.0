@@ -714,7 +714,7 @@
 					}
 					if($privilegio==1){
 					$tabla.='<td>
-						<form class="FormularioAjax" action="'.SERVERURL.'ajax/prestamomAjax.php" 
+						<form class="FormularioAjax" action="'.SERVERURL.'ajax/prestamoAjax.php" 
 						method="POST" data-form="delete" autocomplete="off">
 							<input type="hidden" name="prestamo_codigo_del" 
 							value="'.mainModel::encryption($rows['prestamo_codigo']).'">
@@ -838,4 +838,26 @@
           }
           echo json_encode($alerta);
     }//find contr
+
+    //controlador agregar pago
+    public function agregar_pago_controlador(){
+        //cdg de prestamos
+        $codigo=mainModel::decryption($_POST['pago_codigo_reg']);
+        $codigo=mainModel::limpiar_cadena($codigo);
+        $monto=mainModel::limpiar_cadena($_POST['pago_monto_reg']);
+        $monto=number_format($monto,2,'.','');
+  
+        //comprobando el pago sea mayor a cero
+        if ($monto<=0) {
+            $alerta=[
+                "Alerta"=>"simple",
+                "Titulo"=>"Ocurrio un error inesperado",
+                "Texto"=> "El pago debe ser mayor a 0",
+                "Tipo"=>"error"
+            ];
+            echo json_encode($alerta);
+            exit();
+        }
+        
+      }//find contr
 } 
