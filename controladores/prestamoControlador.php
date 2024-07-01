@@ -858,6 +858,47 @@
             echo json_encode($alerta);
             exit();
         }
+          //comprobando prestamo en la db
+      $datos_prestamo=mainModel::ejecutar_consulta_simple("SELECT * FROM prestamo WHERE prestamo_codigo='$codigo'");
+      if($datos_prestamo->rowCount()<=0){
+        $alerta=[
+            "Alerta"=>"simple",
+            "Titulo"=>"Ocurrió un error inesperado",
+            "Texto"=>"El prestamo que quiere agregar el pago existe en el sistema",
+            "Tipo"=>"error"
+        ];
+        echo json_encode($alerta);
+        exit();
+      }
+      else {
+        $datos_prestamo=$datos_prestamo->fetch();
+      }
+       //comprobando que el monto no sea mayor al que le falta por pagar
+       $pendiente=number_format(($datos_prestamo['prestamo_total']-$datos_prestamo['prestamo_pagado']),2,'.','');
+       if ($monto>$pendiente) {
+        $alerta=[
+            "Alerta"=>"simple",
+            "Titulo"=>"Ocurrio un error inesperado",
+            "Texto"=> "El monto que acaba de ingresar supera el saldo pendiente que tiene en este prestamo",
+            "Tipo"=>"error"
+        ];
+        echo json_encode($alerta);
+        exit();
+       }
+
+       //ccmprobar privilegios 
+		  session_start(['name'=>'SPM']);
+		  if($_SESSION['privilegio_spm']!=1){
+			  $alerta=[
+				  "Alerta"=>"simple",
+				  "Titulo"=>"Ocurrio un error",
+				  "Texto"=> "No tienes los permisos para realizar esta acción",
+				  "Tipo"=>"error"
+			  ];
+		  echo json_encode($alerta);
+		  exit();
+		  }
+          
         
       }//find contr
 } 
