@@ -46,7 +46,6 @@
 			echo $ins_prestamo->eliminar_prestamo_controlador();
 			}
 
-
 //si viiene definido las variables que estan ahi se puede actualizar ^usa el controlador^
 		
 	}else{

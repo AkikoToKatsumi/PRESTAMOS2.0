@@ -1,11 +1,9 @@
     <?php
-
         if($peticionAjax){
             require_once "../modelos/prestamoModelo.php";
         }else{
             require_once "./modelos/prestamoModelo.php";
         }
-
         class prestamoControlador extends prestamoModelo{
             //controlador buscar cliente para prestamos
         
@@ -752,6 +750,7 @@
 	}
 	return $tabla;
 } /* Fin controlador */
+        
 
      //controlador eliminar prestamos
       public function eliminar_prestamo_controlador(){
@@ -807,7 +806,6 @@
           $check_detalles=mainModel::ejecutar_consulta_simple ("SELECT prestamo_codigo FROM detalle WHERE prestamo_codigo='$codigo'");
            $check_detalles=$check_detalles->rowCount();
           if($check_detalles>0){
- 
             $eliminar_detalles=prestamoModelo::eliminar_prestamo_modelo($codigo,"Detalle");
 
             if($eliminar_detalles->rowCount()!=$check_detalles){

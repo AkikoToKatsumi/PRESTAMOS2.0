@@ -34,8 +34,8 @@ function enviar_formulario_ajax(e){
 		texto_alerta="Quieres realizar la operación solicitada";
 	}
 
-	Swal.fire({
-		title: '¿Estás seguro?',
+Swal.fire({
+		title: "¿Estás seguro?",
 		text: texto_alerta,
 		type: 'question',
 		showCancelButton: true,
@@ -46,15 +46,13 @@ function enviar_formulario_ajax(e){
 	}).then((result) => {
 		if(result.value){
 			fetch(action,config)
-			.then(respuesta => respuesta.json())
-			.then(respuesta => {
-				return alertas_ajax(respuesta);
-			});
+	        .then(respuesta => respuesta.json())
+	        .then(respuesta =>{
+	        	return alertas_ajax(respuesta);
+	        });	
 		}
 	});
-
 }
-
 formularios_ajax.forEach(formularios => {
 	formularios.addEventListener("submit", enviar_formulario_ajax);
 });
