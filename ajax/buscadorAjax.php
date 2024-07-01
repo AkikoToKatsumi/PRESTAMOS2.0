@@ -36,9 +36,9 @@ if (isset($_POST['busqueda_inicial']) || isset($_POST['eliminar_busqueda'])
         exit();
     }
 
-    if($modulo=="prestamos"){
-      $fecha_inicio="fecja_inicio_".$modulo;
-      $fecha_final="fecja_final_".$modulo;
+    if($modulo=="prestamo"){
+      $fecha_inicio="fecha_inicio_".$modulo;
+      $fecha_final="fecha_final_".$modulo;
 
       // iniciar busqueda-def variables deseccion
       if(isset($_POST['fecha_inicio']) || isset($_POST['fecha_final'])){
