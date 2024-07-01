@@ -692,10 +692,7 @@
                     </a>
                     </td>
                 
-                
                 ';
-
-
 
 						if($privilegio==1 || $privilegio==2){
 
@@ -734,7 +731,7 @@
 		}
 		$reg_final=$contador-1;
 	}else{
-		//sino hay registros saldra el texto de no hay reg....
+		//si no hay registros saldra el texto de no hay reg
 		if($total>=1){
 			$tabla.='<tr class="text-center" ><td colspan="9">
 			<a href="'.$url.'" class="btn btn-raised btn-primary btn-sm">
@@ -755,4 +752,92 @@
 	}
 	return $tabla;
 } /* Fin controlador */
-}
+
+     //controlador eliminar prestamos
+      public function eliminar_prestamo_controlador(){
+      //cdg de prestamos
+      $codigo=mainModel::decryption($_POST['prestamo_codigo_del']);
+      $codigo=mainModel::limpiar_cadena($codigo);
+
+      //comprobando prestamo en la db
+      $check_prestamo=mainModel::ejecutar_consulta_simple("SELECT prestamo_codigo FROM prestamo WHERE prestamo_codigo='$codigo'");
+      if($check_prestamo->rowCount()<=0){
+        $alerta=[
+            "Alerta"=>"simple",
+            "Titulo"=>"Ocurrió un error inesperado",
+            "Texto"=>"El prestamo que quiere eliminar no existe",
+            "Tipo"=>"error"
+        ];
+        echo json_encode($alerta);
+        exit();
+      }
+
+       //ccmprobar privilegios 
+		  session_start(['name'=>'SPM']);
+		  if($_SESSION['privilegio_spm']!=1){
+			  $alerta=[
+				  "Alerta"=>"simple",
+				  "Titulo"=>"Ocurrio un error",
+				  "Texto"=> "No tienes los permisos para realizar esta acción",
+				  "Tipo"=>"error"
+			  ];
+		  echo json_encode($alerta);
+		  exit();
+		  }
+
+          //comp y eliminar los pagos
+         $check_pagos=mainModel::ejecutar_consulta_simple ("SELECT prestamo_codigo FROM pago WHERE prestamo_codigo='$codigo'");
+         $check_pagos=$check_pagos->rowCount();
+         if($check_pagos>0){
+
+           $eliminar_pagos=prestamoModelo::eliminar_prestamo_modelo($codigo,"Pago");
+           if($eliminar_pagos->rowCount()!=$check_pagos){
+            $alerta=[
+                "Alerta"=>"simple",
+                "Titulo"=>"Ocurrio un error",
+                "Texto"=> "No hemos podido eliminar el prestamo",
+                "Tipo"=>"error"
+            ];
+            echo json_encode($alerta);
+            exit();
+           }
+         }
+
+          //comp y eliminar los detalles
+          $check_detalles=mainModel::ejecutar_consulta_simple ("SELECT prestamo_codigo FROM detalle WHERE prestamo_codigo='$codigo'");
+           $check_detalles=$check_detalles->rowCount();
+          if($check_detalles>0){
+ 
+            $eliminar_detalles=prestamoModelo::eliminar_prestamo_modelo($codigo,"Detalle");
+
+            if($eliminar_detalles->rowCount()!=$check_detalles){
+             $alerta=[
+                 "Alerta"=>"simple",
+                 "Titulo"=>"Ocurrio un error",
+                 "Texto"=> "No hemos podido eliminar el detalle",
+                 "Tipo"=>"error"
+             ];
+             echo json_encode($alerta);
+             exit();
+            }
+        }
+          $eliminar_prestamo=prestamoModelo::eliminar_prestamo_modelo($codigo,"Prestamo");
+    
+          if($eliminar_prestamo->rowCount()==1){
+            $alerta=[
+                "Alerta"=>"recargar",
+                "Titulo"=>"Prestamo eliminado",
+                "Texto"=> "Prestamo eliminado",
+                "Tipo"=>"success"
+            ];           
+          }else{
+            $alerta=[
+                "Alerta"=>"simple",
+                "Titulo"=>"Ocurrio un error",
+                "Texto"=> "No hemos podido eliminar el detalle",
+                "Tipo"=>"error"
+            ];
+          }
+          echo json_encode($alerta);
+    }//find contr
+} 

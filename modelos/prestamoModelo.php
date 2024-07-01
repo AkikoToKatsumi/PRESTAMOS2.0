@@ -37,11 +37,22 @@ class prestamoModelo extends mainModel {
             $sql->bindParam(":Prestamo",$datos['Prestamo']);
             $sql->bindParam(":Item",$datos['Item']);
             $sql->execute();
-
             return $sql;  
-
         }
-
+        //Modelo eliminar prestamo
+        protected static function eliminar_prestamo_modelo($codigo,$tipo){
+            if($tipo=="Prestamo"){
+            $sql=mainModel::conectar()->prepare("DELETE FROM prestamo WHERE prestamo_codigo=:Codigo");
+            }elseif($tipo=="Detalle"){
+               $sql=mainModel::conectar()->prepare("DELETE FROM detalle WHERE prestamo_codigo=:Codigo");
+            }elseif($tipo=="Pago"){
+               $sql=mainModel::conectar()->prepare("DELETE FROM pago WHERE prestamo_codigo=:Codigo");
+            }
+            $sql->bindParam(":Codigo",$codigo);
+            $sql->execute();
+   
+            return $sql;
+        }
                 	/*--------- Modelo agregar pago ---------*/
 		protected static function agregar_pago_modelo($datos){
             $sql=mainModel::conectar()->prepare("INSERT INTO pago(pago_total,pago_fecha,prestamo_codigo)  
@@ -55,24 +66,6 @@ class prestamoModelo extends mainModel {
             return $sql;  
 
         }
-
-        /*--------- Modelo seleccionar prestamo ---------*/
-		protected static function eliminar_prestamo_modelo($codigo,$tipo){
-            if ($tipo=="Prestamo") {
-                $sql=mainModel::conectar()->prepare("DELETE FROM prestamo WHERE prestamo_codigo=:Codigo");
-
-            }elseif ($tipo=="Detalle") {
-                $sql=mainModel::conectar()->prepare("DELETE FROM detalle WHERE prestamo_codigo=:Codigo");
-
-            }elseif ($tipo=="Pago") {
-                $sql=mainModel::conectar()->prepare("DELETE FROM pago WHERE prestamo_codigo=:Codigo");
-            }
-            $sql->bindParam(":Codigo",$codigo);
-            $sql->execute();
-
-            return $sql;  
-        }
-
          /*--------- Modelo datos prestamo ---------*/
 		protected static function datos_prestamo_modelo($tipo,$id){
             if ($tipo=="Unico") {
@@ -117,6 +110,5 @@ class prestamoModelo extends mainModel {
             $sql->execute();
 
             return $sql; 
-        }
-
+        }  
 }

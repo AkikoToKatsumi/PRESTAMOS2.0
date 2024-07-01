@@ -1,3 +1,9 @@
+<?php 
+ if($_SESSION['privilegio_spm']<1 || $_SESSION['privilegio_spm']>2){
+	echo $lc->forzar_cierre_sesion_controlador();
+    exit();
+}
+?>
 <div class="full-box page-header">
                 <h3 class="text-left">
                     <i class="fas fa-sync-alt fa-fw"></i> &nbsp; ACTUALIZAR PRÉSTAMO

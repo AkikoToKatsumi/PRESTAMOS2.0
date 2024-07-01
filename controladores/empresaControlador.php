@@ -218,7 +218,7 @@
                     "Tipo"=>"error"
                 ];
             }
-   echo json_encode($alerta);
+        echo json_encode($alerta);
         }//fin controlador
 
 }
