@@ -60,7 +60,9 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="<?php echo SERVERURL; ?>user-update/">
+                      
+                     
+                      <a class="dropdown-item" href="<?php echo SERVERURL; ?>user-update/<?php echo $lc->encryption($_SESSION['id_spm']) ?>">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">Usuario</span>
                       </a>

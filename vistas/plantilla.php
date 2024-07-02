@@ -1,3 +1,6 @@
+<?php
+  session_start(['name'=>'SPM']);
+?>
 <!DOCTYPE html>
 <html lang="es"
 class="light-style layout-menu-fixed"
@@ -67,7 +70,8 @@ $IV = new vistasControlador();
  if ($vistas=="login" || $vistas=="404"){
     require_once "./vistas/contenidos/".$vistas."-view.php";
 
- }else{session_start(['name'=>'SPM']);
+ }else{
+
 $pagina=explode("/", $_GET['views']);
 
     require_once"./controladores/loginControlador.php";
@@ -75,7 +79,7 @@ $pagina=explode("/", $_GET['views']);
 
     if(!isset($_SESSION['token_spm']) || !isset($_SESSION['usuario_spm']) ||
     !isset($_SESSION['privilegio_spm']) || !isset($_SESSION['id_spm']) ){
-echo $lc->forzar_cierre_sesion_controlador() ;
+    $lc->forzar_cierre_sesion_controlador() ;
 exit();
     }
 ?>

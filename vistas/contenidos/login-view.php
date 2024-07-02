@@ -25,6 +25,6 @@
 
 		$ins_login= new loginControlador();
 
-		echo $ins_login->iniciar_sesion_controlador();
+		$ins_login->iniciar_sesion_controlador();
 	}
 ?>
