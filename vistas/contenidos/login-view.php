@@ -1,6 +1,6 @@
 <div id="auth">
     <div class="row h-100">
-        <div class="col-lg-5 col-12">
+        <div class="col-lg-4 col-12">
             <div id="auth-left">
                 <div class="auth-logo" style="margin: 0px 0px 0 -50px;">
                     <a href="<?php echo SERVERURL; ?>index.php">
@@ -28,8 +28,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-7 col-12 d-flex justify-content-center align-items-center">
-            <img src="<?php echo SERVERURL; ?>vistas/assets/img/SP.png" alt="Préstamo" style="max-width: 100%; height: auto;">
+        <div class="col-lg-8 col-12 d-flex justify-content-center align-items-center">
+            <img src="<?php echo SERVERURL; ?>vistas/assets/img/SP.png" alt="Préstamo" style="width: 92%; height: auto;">
         </div>
     </div>
 </div>
