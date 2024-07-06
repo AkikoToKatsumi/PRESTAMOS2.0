@@ -74,9 +74,7 @@
     </style>
 </head>
 <body>
-
-<!-- Page header -->
-<div class="full-box page-header">
+<div class="page-heading">
     <h3 class="text-left">
         <i class="material-icons">home</i> &nbsp; INICIO
     </h3>
@@ -169,7 +167,6 @@
         <div class="tile-tittle">Empresa</div>
     </a>
 </div>
-
 </body>
 </html>
  

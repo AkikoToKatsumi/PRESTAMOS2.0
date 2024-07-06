@@ -644,7 +644,7 @@
 	$Npaginas=ceil($total/$registros);
 
 	$tabla.='<div class="table-responsive">
-		<table class="table table-sm">
+                                <table class="table table-sm">
 			<thead>
 				<tr class="text-center roboto-medium">
 					<th>#</th>
@@ -677,9 +677,9 @@
 				<td>'.$rows['prestamo_estado'].'</td>';
 
                 if ($rows['prestamo_pagado']<$rows['prestamo_total']) {
-                    $tabla.='<td>Pendiente: <span class="badge badge-danger">'.MONEDA.number_format(($rows['prestamo_total']-$rows['prestamo_pagado']),2,'.',',').'</span> </td>';
+                    $tabla.='<td >Pendiente: <span class="badge badge-danger">'.MONEDA.number_format(($rows['prestamo_total']-$rows['prestamo_pagado']),2,'.',',').'</span> </td>';
                 }else {
-                   $tabla.='<td> <span class="badge badge-light">Cancelado</span> </td>';
+                   $tabla.='<td> <span class="badge badge-light" style="color: red;">Cancelado</span> </td>';
                 }
 
                 $tabla.='

@@ -27,12 +27,14 @@
 				</ul>	
 			</div>
 			
-			<!-- Content here-->
-			<div class="container-fluid">
-			<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>ajax/clienteAjax.php" method="POST" data-form="save" autocomplete="off">
-		
+			
+        <div class="card">
+			<form class="FormularioAjax" action="<?php echo SERVERURL; ?>ajax/clienteAjax.php" method="POST" data-form="save" autocomplete="off">
+				
 					<fieldset>
+					<div class="card-header">
 						<legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
+					</div>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-12 col-md-6">
@@ -74,5 +76,6 @@
 						&nbsp; &nbsp;
 						<button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; GUARDAR</button>
 					</p>
+					
 				</form>
 			</div>	

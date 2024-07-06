@@ -21,3 +21,7 @@
         
         <!-- General Styles -->
         <link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/style.css">
+
+        <link rel="stylesheet" href="<?php echo SERVERURL; ?>assets/extensions/simple-datatables/style.css">
+
+

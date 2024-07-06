@@ -167,9 +167,9 @@
 				$Npaginas=ceil($total/$registros);
 		
 				$tabla.='<div class="table-responsive">
-					<table class="table table-sm">
+                                <table class="table table-sm">
 						<thead>
-							<tr class="text-center roboto-medium">
+							<tr>
 								<th>#</th>
 								<th>DNI</th>
 								<th>NOMBRE</th>

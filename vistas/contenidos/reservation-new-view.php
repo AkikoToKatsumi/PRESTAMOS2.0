@@ -27,10 +27,12 @@
         </li>
     </ul>
 </div>
-<div class="container-fluid">
-	<div class="container-fluid form-neon">
+<div class="card">
+	<div class="container-fluid">
         <div class="container-fluid">
-            <p class="text-center roboto-medium">AGREGAR CLIENTE O ITEMS</p>
+        <div class="card-header">
+            <p class="text-center roboto-medium" style="margin-top: 40px;">AGREGAR CLIENTE O ITEMS</p>
+        </div>
             <p class="text-center">
                 <?php if(empty($_SESSION['datos_cliente'])){?>
                 <button type="button" class="btn btn-primary" data-toggle="modal" 
@@ -58,6 +60,8 @@
                 </form>
                 <?php } ?>
             </div>
+            <div class="row" id="table-responsive">
+            <div class="card">
             <div class="table-responsive">
                 <table class="table table-sm">
                     <thead>
@@ -113,7 +117,7 @@
                         }
                         ?>
                         
-                        <tr class="text-center bg-light">
+                        <tr class="text-center">
                             <td><strong>TOTAL</strong></td>
                             <td><strong><?php echo   $_SESSION['prestamo_item']; ?> Items</strong></td>
                             <td colspan="2"></td>
@@ -135,10 +139,15 @@
                     </tbody>
                 </table>
             </div>
+            </div>
+            </div>
+
         </div>
 		<form class="FormularioAjax" action="<?php echo SERVERURL; ?>ajax/prestamoAjax.php" method="POST" data-form="save" autocomplete="off">
             <fieldset>
+            <div class="card-header">
                 <legend><i class="far fa-clock"></i> &nbsp; Fecha y hora de préstamo</legend>
+            </div>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 col-md-6">
@@ -157,7 +166,9 @@
                 </div>
             </fieldset>
             <fieldset>
+            <div class="card-header">
                 <legend><i class="fas fa-history"></i> &nbsp; Fecha y hora de entrega</legend>
+               </div>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 col-md-6">
@@ -176,7 +187,9 @@
                 </div>
             </fieldset>
 			<fieldset>
+            <div class="card-header">
 				<legend><i class="fas fa-cubes"></i> &nbsp; Otros datos</legend>
+            </div>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12 col-md-4">

@@ -27,7 +27,12 @@
 			    </ul>
 			</div>
 
-			<div class="container-fluid">
+			<section class="section">
+			<div class="row" id="table-responsive">
+            <div class="card">
+			<!-- Content here-->
+			<div class="card-content">
+		
 				<?php
                     require_once "./controladores/prestamoControlador.php";
                     $ins_prestamo = new prestamoControlador();
@@ -36,3 +41,6 @@
                     $_SESSION['privilegio_spm'],$pagina[0],"Prestamo","","");
 	            ?>
 			</div>
+			</div>
+		</div>
+		</section>

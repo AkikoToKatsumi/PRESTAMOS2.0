@@ -33,14 +33,14 @@
                 </ul>
             </div>
 
-            <div class="container-fluid">
-            <?php 
+            <div class="card">
+                <?php 
 				require_once "./controladores/prestamoControlador.php";
 
 				$ins_prestamo= new prestamoControlador();
 
 				$datos_prestamo=$ins_prestamo->datos_prestamo_controlador("Unico",$pagina[1]);
-			if($datos_prestamo->rowCount()==1){
+			    if($datos_prestamo->rowCount()==1){
 				$campos=$datos_prestamo->fetch();
                 if ($campos['prestamo_estado']=="Finalizado" && $campos["prestamo_pagado"]==$campos['prestamo_total']) {
                     
@@ -54,7 +54,6 @@
                 <?php 
                 }else { ?>
                 <?php if($campos["prestamo_pagado"]!=$campos['prestamo_total']){  ?>
-                <div class="container-fluid form-neon">
                     <div class="container-fluid">
                         <p class="text-center roboto-medium">AGREGAR NUEVO PAGO A ESTE PRÉSTAMO</p>
                         <p class="text-center">Este préstamo presenta un pago pendiente por la cantidad de 
@@ -112,7 +111,9 @@
                     method="POST" data-form="update" autocomplete="off">
                     <input type="hidden" name="prestamo_codigo_up" value="<?php echo $lc->encryption($campos['prestamo_codigo']); ?>">
                         <fieldset>
+                        <div class="card-header">
                             <legend><i class="far fa-clock"></i> &nbsp; Fecha y hora de préstamo</legend>
+                            </div>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 col-md-6">
@@ -131,7 +132,9 @@
                             </div>
                         </fieldset>
                         <fieldset>
+                        <div class="card-header">
                             <legend><i class="fas fa-history"></i> &nbsp; Fecha y hora de entrega</legend>
+                            </div>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 col-md-6">
@@ -150,7 +153,9 @@
                             </div>
                         </fieldset>
                         <fieldset>
+                        <div class="card-header">
                             <legend><i class="fas fa-cubes"></i> &nbsp; Otros datos</legend>
+                            </div>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 col-md-4">
@@ -198,6 +203,7 @@
                         </p>
                     </form>
                 </div>
+            </div>
 
                 <!-- MODAL PAGOS -->
                 <div class="modal fade" id="ModalPago" tabindex="-1" role="dialog" aria-labelledby="ModalPago" aria-hidden="true" style="z-index: 1600">
@@ -214,9 +220,9 @@
                                 <div class="table-responsive" >
                                     <table class="table table-hover table-bordered table-sm">
                                         <thead>
-                                            <tr class="text-center bg-dark">
-                                                <th>FECHA</th>
-                                                <th>MONTO</th>
+                                            <tr class="text-center">
+                                                <th><strong>FECHA</strong></th>
+                                                <th><strong>MONTO</strong></th>
                                             </tr>
                                         </thead>
                                         <tbody>

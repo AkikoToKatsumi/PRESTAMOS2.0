@@ -9,7 +9,7 @@
 		<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS
 	</h3>
 	<p class="text-justify">
-		EN ESTE APARTADO SE PODRÁ MOSTRAR EL LISTADO DE USUAIOS EN EL SISTEMA 
+		EN ESTE APARTADO SE PODRÁ MOSTRAR EL LISTADO DE USUARIOS EN EL SISTEMA 
 	</p>
 </div>
 
@@ -27,7 +27,11 @@
 	</ul>	
 </div>
 
-<div class="container-fluid">
+<section class="section">
+			<div class="row" id="table-responsive">
+            <div class="card">
+			<!-- Content here-->
+			<div class="card-content">
 	<?php
 		require_once "./controladores/usuarioControlador.php";
 		$ins_usuario = new usuarioControlador();
@@ -35,3 +39,6 @@
 		echo $ins_usuario->paginador_usuario_controlador($pagina[1],15,$_SESSION['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],"");
 	?>
 </div>
+			</div>
+		</div>
+		</section>

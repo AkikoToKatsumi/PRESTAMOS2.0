@@ -14,12 +14,14 @@
 
  if($datos_empresa-> rowCount()==0){
 ?>
-<div class="container-fluid">
-    <form class="form-neon FormularioAjax"   
+	<div class="card">
+    <form class="FormularioAjax"   
     action="<?php echo SERVERURL; ?>ajax/empresaAjax.php" 
     method="POST" data-form="save" autocomplete="off">
         <fieldset>
+        <div class="card-header">
             <legend><i class="far fa-building"></i> &nbsp; Información de la empresa</legend>
+        </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -65,8 +67,8 @@
    $campos=$datos_empresa->fetch();
 ?>
 
-<div class="container-fluid">
-<form class="form-neon FormularioAjax"   
+<div class="card">
+<form class="FormularioAjax"   
     action="<?php echo SERVERURL; ?>ajax/empresaAjax.php" 
     method="POST" data-form="update" 
     autocomplete="off">
@@ -74,7 +76,9 @@
     <input type="hidden" name="empresa_id_up" value="<?php echo $campos[
     'empresa_id']; ?>">
         <fieldset>
+        <div class="card-header">
             <legend><i class="far fa-building"></i> &nbsp;Actualizar Información de la empresa</legend>
+        </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-md-6">

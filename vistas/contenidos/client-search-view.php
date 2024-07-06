@@ -33,15 +33,15 @@
 			?>
 			<!-- Content -->
 			 
-			<div class="container-fluid">
-				<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>
+			<div class="card">
+				<form class="FormularioAjax" action="<?php echo SERVERURL; ?>
 				ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off">
 					<input type="hidden" name="modulo" value="cliente">
 					<div class="container-fluid">
 						<div class="row justify-content-md-center">
 							<div class="col-12 col-md-6">
 								<div class="form-group">
-									<label for="inputSearch" class="bmd-label-floating">
+									<label for="inputSearch" class="bmd-label-floating" style="margin-top: 40px;">
 										¿Qué cliente estas buscando?</label>
 									<input type="text" class="form-control" 
 									name="busqueda_inicial" id="inputSearch" maxlength="30">
@@ -86,8 +86,11 @@
 					</div>
 				</form>
 			</div>
-
-			<div class="container-fluid">
+			<section class="section">
+			<div class="row" id="table-responsive">
+            <div class="card">
+			<!-- Content here-->
+			<div class="card-content">
 			<?php
 		require_once "./controladores/clienteControlador.php";
 		$ins_cliente = new clienteControlador();
@@ -96,6 +99,9 @@
 		$_SESSION['privilegio_spm'],$pagina[0],$_SESSION ['busqueda_cliente']);
 	?>
 			</div>
+			</div>
+			</div>
+			</section>
 			<?php } ?>
 			
 			

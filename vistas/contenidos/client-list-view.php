@@ -21,9 +21,12 @@
 					</li>
 				</ul>	
 			</div>
-			
+			<section class="section">
+			<div class="row" id="table-responsive">
+            <div class="card">
 			<!-- Content here-->
-			<div class="container-fluid">
+			<div class="card-content">
+		
 			<?php
 		require_once "./controladores/clienteControlador.php";
 		$ins_cliente = new clienteControlador();
@@ -32,3 +35,6 @@
 		$_SESSION['privilegio_spm'],$pagina[0],"");
 	?>
 			</div>
+			</div>
+		</div>
+		</section>

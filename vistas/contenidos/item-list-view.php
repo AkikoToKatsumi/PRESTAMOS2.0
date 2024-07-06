@@ -20,11 +20,18 @@
                 </ul>
             </div>
 
-			<div class="container-fluid">
+			<section class="section">
+			<div class="row" id="table-responsive">
+            <div class="card">
+			<!-- Content here-->
+			<div class="card-content">
 			<?php
 		require_once "./controladores/itemControlador.php";
 		$ins_item = new itemControlador();
 
 		echo $ins_item->paginador_item_controlador($pagina[1],15,$_SESSION['privilegio_spm'],$pagina[0],"");
 	?>
+		</div>
 			</div>
+		</div>
+		</section>

@@ -33,15 +33,15 @@
 			?>
 			<!-- Content -->
 			 
-			<div class="container-fluid">
-				<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>
+			<div class="card">
+				<form class="FormularioAjax" action="<?php echo SERVERURL; ?>
 				ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off">
 					<input type="hidden" name="modulo" value="usuario">
 					<div class="container-fluid">
 						<div class="row justify-content-md-center">
 							<div class="col-12 col-md-6">
 								<div class="form-group">
-									<label for="inputSearch" class="bmd-label-floating">
+									<label for="inputSearch" class="bmd-label-floating" style="margin-top: 40px;">
 										¿Qué usuario estas buscando?</label>
 									<input type="text" class="form-control" 
 									name="busqueda_inicial" id="inputSearch" maxlength="30">

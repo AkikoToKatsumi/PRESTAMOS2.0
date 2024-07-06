@@ -22,11 +22,13 @@
             </div>
             
             <!--CONTENT-->
-            <div class="container-fluid">
-				<form class="form-neon FormularioAjax" 
+            <div class="card">
+				<form class="FormularioAjax" 
 				action="<?php echo SERVERURL; ?>ajax/itemAjax.php" method="POST" data-form="save" autocomplete="off">
 					<fieldset>
+					<div class="card-header">
 						<legend><i class="far fa-plus-square"></i> &nbsp; Información del item</legend>
+					</div>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-12 col-md-4">

@@ -43,10 +43,13 @@
 		if($datos_usuario->rowCount()==1){
 			$campos=$datos_usuario->fetch();
 	?>
-	<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>ajax/usuarioAjax.php" method="POST" data-form="update" autocomplete="off">
+	<div class="card">
+	<form class="FormularioAjax" action="<?php echo SERVERURL; ?>ajax/usuarioAjax.php" method="POST" data-form="update" autocomplete="off">
 		<input type="hidden" name="usuario_id_up" value="<?php echo $pagina[1]; ?>">
 		<fieldset>
+		<div class="card-header">
 			<legend><i class="far fa-address-card"></i> &nbsp; Información personal</legend>
+		</div>	
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-md-4">
@@ -113,8 +116,10 @@
 		</fieldset>
 		<br><br><br>
 		<fieldset>
+		<div class="card-header">
 			<legend><i class="fas fa-user-lock"></i>
 			 &nbsp; Información de la cuenta</legend>
+		</Div>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-md-6">
@@ -160,8 +165,10 @@
 		</fieldset>
 		<br><br><br>
 		<fieldset>
+		<div class="card-header">
 			<legend style="margin-top: 40px;"><i class="fas fa-lock"></i> &nbsp; Nueva contraseña</legend>
 			<p>Para actualizar la contraseña de esta cuenta ingrese una nueva y vuelva a escribirla. En caso que no desee actualizarla debe dejar vacíos los dos campos de las contraseñas.</p>
+			</div>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-md-6">
@@ -209,7 +216,9 @@
 		<?php } ?>
 		<br><br><br>
 		<fieldset>
+		<div class="card-header">
 			<p class="text-center">Para poder guardar los cambios en esta cuenta debe de ingresar su nombre de usuario y contraseña</p>
+		</div>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-md-6">

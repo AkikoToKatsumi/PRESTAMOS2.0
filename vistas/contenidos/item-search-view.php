@@ -27,15 +27,15 @@
 			])){
 			?>
             <!--CONTENT-->
-            <div class="container-fluid">
-                <form class=" form-neon FormularioAjax" action="<?php echo SERVERURL; ?>
+            <div class="card">
+                <form class="FormularioAjax" action="<?php echo SERVERURL; ?>
 				ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off">
                 <input type="hidden" name="modulo" value="item">
                     <div class="container-fluid">
                         <div class="row justify-content-md-center">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="inputSearch" class="bmd-label-floating">¿Qué item estas buscando?</label>
+                                    <label for="inputSearch" class="bmd-label-floating" style="margin-top: 40px;">¿Qué item estas buscando?</label>
                                     <input type="text" class="form-control" name="busqueda_inicial" id="inputSearch" maxlength="30">
                                 </div>
                             </div>
@@ -69,7 +69,11 @@
                     </div>
                 </form>
             </div>
-            <div class="container-fluid">
+            <section class="section">
+			<div class="row" id="table-responsive">
+            <div class="card">
+			<!-- Content here-->
+			<div class="card-content">
 <?php
 		require_once "./controladores/itemControlador.php";
 		$ins_item = new itemControlador();
@@ -77,4 +81,7 @@
 		echo $ins_item->paginador_item_controlador($pagina[1],15,$_SESSION['privilegio_spm'],$pagina[0],$_SESSION ['busqueda_item']);
 	?>
 	</div>
+			</div>
+			</div>
+			</section>
 <?php } ?>

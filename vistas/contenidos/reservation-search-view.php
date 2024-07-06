@@ -31,15 +31,15 @@
 			if(!isset($_SESSION['fecha_inicio_prestamo']) && empty($_SESSION['fecha_inicio_prestamo']) && 
 			!isset($_SESSION['fecha_final_prestamo']) && empty($_SESSION['fecha_final_prestamo'])){
 			?>
-			<div class="container-fluid">
-			<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>
+			<div class="card">
+			<form class="FormularioAjax" action="<?php echo SERVERURL; ?>
 			ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off">
 				<input type="hidden" name="modulo" value="prestamo">
 					<div class="container-fluid">
 						<div class="row justify-content-md-center">
 							<div class="col-12 col-md-4">
 								<div class="form-group">
-									<label for="busqueda_inicio_prestamo" >Fecha inicial (día/mes/año)</label>
+									<label for="busqueda_inicio_prestamo" style="margin-top: 40px;" >Fecha inicial (día/mes/año)</label>
 									<input type="date" 
 									class="form-control"
 									 name="fecha_inicio" 
@@ -48,7 +48,7 @@
 							</div>
 							<div class="col-12 col-md-4">
 								<div class="form-group">
-									<label for="busqueda_final_prestamo" >Fecha final (día/mes/año)</label>
+									<label for="busqueda_final_prestamo" style="margin-top: 40px;">Fecha final (día/mes/año)</label>
 									<input type="date"
 									 class="form-control" 
 									 name="fecha_final" id="busqueda_final_prestamo" maxlength="30">
@@ -91,7 +91,11 @@
 			</div>
 
 
-			<div class="container-fluid">
+			<section class="section">
+			<div class="row" id="table-responsive">
+            <div class="card">
+			<!-- Content here-->
+			<div class="card-content">
 			<?php
                     require_once "./controladores/prestamoControlador.php";
                     $ins_prestamo = new prestamoControlador();
@@ -99,5 +103,8 @@
                     echo $ins_prestamo->paginador_prestamo_controlador($pagina[1],15,
                     $_SESSION['privilegio_spm'],$pagina[0],"Busqueda",$_SESSION['fecha_inicio_prestamo'],$_SESSION['fecha_final_prestamo']);
 	            ?>
+						</div>
 			</div>
+			</div>
+			</section>
             <?php } ?>

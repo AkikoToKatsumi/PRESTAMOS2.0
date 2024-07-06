@@ -38,12 +38,15 @@
 			if($datos_item->rowCount()==1){
 				$campos=$datos_item->fetch();
 				?>
-				<form class=" form-neon FormularioAjax" action="<?php echo SERVERURL; ?>
+				<div class="card">
+				<form class="FormularioAjax" action="<?php echo SERVERURL; ?>
 				ajax/itemAjax.php" method="POST" data-form="update" autocomplete="off">
 				<input type="hidden" name="item_id_up" value="<?php echo $pagina[1];?>">
 
 					<fieldset>
+					<div class="card-header">
 						<legend><i class="far fa-plus-square"></i> &nbsp; Información del item</legend>
+					</div>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-12 col-md-4">
@@ -89,6 +92,7 @@
 						<button type="submit" class="btn btn-raised btn-success btn-sm"><i class="fas fa-sync-alt"></i> &nbsp; ACTUALIZAR</button>
 					</p>
 				</form>
+				</div>
 				<?php }else{ ?>
 
                 <div class="alert alert-danger text-center" role="alert">

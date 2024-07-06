@@ -172,7 +172,7 @@ public function paginador_item_controlador($pagina,$registros,$privilegio,$url,$
 	$Npaginas=ceil($total/$registros);
 
 	$tabla.='<div class="table-responsive">
-		<table class="table table-sm">
+            <table class="table table-sm">
 			<thead>
 				<tr class="text-center roboto-medium">
 					<th>#</th>

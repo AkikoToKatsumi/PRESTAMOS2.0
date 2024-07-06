@@ -40,13 +40,15 @@
 			if($datos_cliente->rowCount()==1){
 				$campos=$datos_cliente->fetch();
 				?>
-				<form class=" form-neon FormularioAjax" action="<?php echo SERVERURL; ?>
+				<div class="card">
+				<form class="FormularioAjax" action="<?php echo SERVERURL; ?>
 				ajax/clienteAjax.php" method="POST" data-form="update" autocomplete="off">
-
 				<input type="hidden" name="cliente_id_up" value="<?php echo $pagina[1
 			     ]; ?>">
 					<fieldset>
+					<div class="card-header">
 						<legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
+					</div>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-12 col-md-6">
@@ -104,6 +106,7 @@
 							<i class="fas fa-sync-alt"></i> &nbsp; ACTUALIZAR</button>
 					</p>
 				</form>
+				</div>
                 <?php }else{?>
 				<div class="alert alert-danger text-center" role="alert">
 					<p><i class="fas fa-exclamation-triangle fa-5x"></i></p>
