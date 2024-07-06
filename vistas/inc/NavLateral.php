@@ -45,6 +45,7 @@
     </div>
     <div  >
     <figure class="full-box nav-lateral-avatar">
+    <?php  if($_SESSION['genero_spm']=="Femenino" ){   ?>
             <img src="<?php echo SERVERURL; ?>vistas/assets/avatar/girlicon.png.png" class="img-fluid" alt="Avatar">
             <figcaption class="roboto-medium text-center" style="color: darkgrey;"><strong>
             <?php echo $_SESSION['nombre_spm']." ".$_SESSION['apellido_spm']; ?> </strong>
@@ -53,6 +54,16 @@
               <?php echo $_SESSION['usuario_spm']; ?></strong>
             </small>
           </figcaption>
+        <?php }elseif ($_SESSION['genero_spm']=="Masculino" ){   ?>
+            <img src="<?php echo SERVERURL; ?>vistas/assets/avatar/avatar.png" class="img-fluid" alt="Avatar">
+            <figcaption class="roboto-medium text-center" style="color: darkgrey;"><strong>
+            <?php echo $_SESSION['nombre_spm']." ".$_SESSION['apellido_spm']; ?> </strong>
+            <br>
+            <small class="roboto-condensed-light bolder" style="color: darkgrey;"><strong>
+              <?php echo $_SESSION['usuario_spm']; ?></strong>
+            </small>
+          </figcaption>
+        <?php } ?>
     </div>
     
     <div class="sidebar-menu">

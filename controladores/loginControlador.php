@@ -72,6 +72,7 @@
 				$_SESSION['apellido_spm']=$row['usuario_apellido'];
 				$_SESSION['usuario_spm']=$row['usuario_usuario'];
 				$_SESSION['privilegio_spm']=$row['usuario_privilegio'];
+				$_SESSION['genero_spm']=$row['genero'];
 				$_SESSION['token_spm']=md5(uniqid(mt_rand(),true));
 				
 				if(headers_sent()){

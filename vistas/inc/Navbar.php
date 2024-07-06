@@ -55,22 +55,42 @@
     <!-- User -->
     <li class="nav-item navbar-dropdown dropdown-user dropdown">
         <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+        <?php  if($_SESSION['genero_spm']=="Femenino" ){   ?>
             <div class="avatar avatar-online">
                 <img src="<?php echo SERVERURL;?>vistas/assets/avatar/girlicon.png.png" alt class="w-px-40 h-auto rounded-circle" />
             </div>
+            <?php }elseif ($_SESSION['genero_spm']=="Masculino" ){   ?>
+                <div class="avatar avatar-online">
+                <img src="<?php echo SERVERURL;?>vistas/assets/avatar/avatar.png" alt class="w-px-40 h-auto rounded-circle" />
+            </div>
+                <?php } ?>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
             <li>
                 <a class="dropdown-item" href="#">
                     <div class="d-flex">
                         <div class="flex-shrink-0 me-3">
+                        <?php  if($_SESSION['genero_spm']=="Femenino" ){   ?>
                             <div class="avatar avatar-online">
                                 <img src="<?php echo SERVERURL;?>vistas/assets/avatar/girlicon.png.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
+                            <?php }elseif ($_SESSION['genero_spm']=="Masculino" ){   ?>
+                                <div class="avatar avatar-online">
+                                <img src="<?php echo SERVERURL;?>vistas/assets/avatar/avatar.png" alt class="w-px-40 h-auto rounded-circle" />
+                            </div>
+                            <?php } ?>
                         </div>
                         <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">GABRIELA GARCÍA</span>
-                            <small class="text-muted">Admin DB</small>
+                            <span class="fw-semibold d-block"><?php echo $_SESSION['nombre_spm']." ".$_SESSION['apellido_spm'] ?></span>
+                            <?php if($_SESSION['privilegio_spm']==1){ ?>
+                            <small class="text-muted">Control Total</small>
+                            <?php } 
+                            elseif($_SESSION['privilegio_spm']==2){ ?>
+                            <small class="text-muted">Edicion</small>
+                            <?php } 
+                            elseif($_SESSION['privilegio_spm']==2){ ?>
+                            <small class="text-muted">Registrar</small>
+                            <?php } ?>
                         </div>
                     </div>
                 </a>
