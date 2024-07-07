@@ -36,7 +36,7 @@
 	$pdf = new FPDF('P','mm','Letter');
 	$pdf->SetMargins(17,17,17);
 	$pdf->AddPage();
-	$pdf->Image('../vistas/assets/img/logo.png',10,10,30,30,'PNG');
+	$pdf->Image('../vistas/assets/img/logoaki2.png',10,10,50,30,'PNG');
 
 	$pdf->SetFont('Arial','B',18);
 	$pdf->SetTextColor(0,107,181);
