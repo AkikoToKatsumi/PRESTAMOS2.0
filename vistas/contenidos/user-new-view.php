@@ -67,6 +67,16 @@
 							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="usuario_direccion_reg" id="usuario_direccion" maxlength="190">
 						</div>
 					</div>
+					<div class="col-12">
+						<div class="form-group">
+						<label for="usuario_genero" class="bmd-label-floating">Genero</label>
+							<select class="form-control" name="usuario_genero_reg">
+								<option value="" selected="" >Seleccione una opción</option>
+								<option value="Femenino">Femenino</option>
+								<option value="Masculino">Masculino</option>
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
 		</fieldset>

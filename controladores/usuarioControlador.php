@@ -20,12 +20,12 @@
 			$clave1=mainModel::limpiar_cadena($_POST['usuario_clave_1_reg']);
 			$clave2=mainModel::limpiar_cadena($_POST['usuario_clave_2_reg']);
 
-
+			$genero=mainModel::limpiar_cadena($_POST['usuario_genero_reg']);
 			$privilegio=mainModel::limpiar_cadena($_POST['usuario_privilegio_reg']);
 
 
 			/*== comprobar campos vacios ==*/
-			if($dni=="" || $nombre=="" || $apellido=="" || $usuario=="" || $clave1=="" || $clave2==""){
+			if($dni=="" || $nombre=="" || $apellido=="" || $usuario=="" || $clave1=="" || $clave2=="" || $genero==""){
 				$alerta=[
 					"Alerta"=>"simple",
 					"Titulo"=>"Ocurrió un error inesperado",
@@ -186,6 +186,21 @@
 				$clave=mainModel::encryption($clave1);
 			}
 
+			/*== Comprobando Genero ==*/
+			if($genero!="Femenino" && $genero!="Masculino"){
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Ocurrió un error inesperado",
+					"Texto"=>"El genero seleccionado no es valido",
+					"Tipo"=>"error"
+				];
+				echo json_encode($alerta);
+				exit();
+			}
+
+
+
+
 			/*== Comprobando privilegio ==*/
 			if($privilegio<1 || $privilegio>3){
 				$alerta=[
@@ -198,6 +213,8 @@
 				exit();
 			}
 
+			
+
 			$datos_usuario_reg=[
 				"DNI"=>$dni,
 				"Nombre"=>$nombre,
@@ -208,6 +225,7 @@
 				"Usuario"=>$usuario,
 				"Clave"=>$clave,
 				"Estado"=>"Activa",
+				"Genero"=>$genero,
 				"Privilegio"=>$privilegio
 			];
 
@@ -453,15 +471,16 @@
 			$apellido=mainModel::limpiar_cadena($_POST['usuario_apellido_up']);
 			$telefono=mainModel::limpiar_cadena($_POST['usuario_telefono_up']);
 			$direccion=mainModel::limpiar_cadena($_POST['usuario_direccion_up']);
-
 			$usuario=mainModel::limpiar_cadena($_POST['usuario_usuario_up']);
 			$email=mainModel::limpiar_cadena($_POST['usuario_email_up']);
+			$genero=mainModel::limpiar_cadena($_POST['usuario_genero_up']);
 
 			if(isset($_POST['usuario_estado_up'])){
 				$estado=mainModel::limpiar_cadena($_POST['usuario_estado_up']);
 			}else{
 				$estado=$campos['usuario_estado'];
 			}
+			
 
 			if(isset($_POST['usuario_privilegio_up'])){
 				$privilegio=mainModel::limpiar_cadena($_POST['usuario_privilegio_up']);
@@ -730,6 +749,7 @@
 				"Usuario"=>$usuario,
 				"Clave"=>$clave,
 				"Estado"=>$estado,
+				"Genero"=>$genero,
 				"Privilegio"=>$privilegio,
 				"ID"=>$id
 			];

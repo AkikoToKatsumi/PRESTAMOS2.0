@@ -111,6 +111,19 @@
 							 value="<?php echo $campos['usuario_direccion']; ?>" >
 						</div>
 					</div>
+					<div class="col-12">
+						<div class="form-group">
+						<label for="usuario_direccion" 
+						class="bmd-label-floating">Genero</label>
+							<select class="form-control" name="usuario_genero_up">
+								<option value="Femenino" <?php if($campos['genero']=="Femenino"){ echo 'selected=""'; } ?> >Femenino <?php if($campos['genero']==1){ echo '(Actual)'; } ?></option>
+
+								<option value="Masculino" <?php if($campos['genero']=="Masculino"){ echo 'selected=""'; } ?> >Masculino <?php if($campos['genero']==2){ echo '(Actual)'; } ?></option>
+
+				
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
 		</fieldset>
