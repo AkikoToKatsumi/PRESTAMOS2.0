@@ -3,7 +3,6 @@
 			        <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; FINALIZADOS
 			    </h3>
 			    <p class="text-justify">
-			        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia fugiat est ducimus inventore, repellendus deserunt cum aliquam dignissimos, consequuntur molestiae perferendis quae, impedit doloribus harum necessitatibus magnam voluptatem voluptatum alias!
 			    </p>
 			</div>
 

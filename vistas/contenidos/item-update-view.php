@@ -9,8 +9,7 @@
                     <i class="fas fa-sync-alt fa-fw"></i> &nbsp; ACTUALIZAR ITEM
                 </h3>
                 <p class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque laudantium necessitatibus eius iure adipisci modi distinctio. Earum repellat iste et aut, ullam, animi similique sed soluta tempore cum quis corporis!
-                </p>
+En este apartado puedes actualizar los datos del item que ya tengas registrado en el software.                </p>
             </div>
 
             <div class="container-fluid">

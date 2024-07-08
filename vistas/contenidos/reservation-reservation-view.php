@@ -3,8 +3,7 @@
                     <i class="far fa-calendar-alt fa-fw"></i> &nbsp; RESERVACIONES
                 </h3>
                 <p class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia fugiat est ducimus inventore, repellendus deserunt cum aliquam dignissimos, consequuntur molestiae perferendis quae, impedit doloribus harum necessitatibus magnam voluptatem voluptatum alias!
-                </p>
+Aqui podras visuaizar los prestamos que hay efectuandose en el sistema, podras eliminarlo, actualizar pagos e imprimir la respectiva factura que pueda corresponderle.                </p>
             </div>
 
             <div class="container-fluid">

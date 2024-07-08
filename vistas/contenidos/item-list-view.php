@@ -3,8 +3,7 @@
                 <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS
 				</h3>
 				<p class="text-justify">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
-				</p>
+Este es el apartado en donde podrás ver la lista de los items tanto como habilitados o inhabilitados para prestar.				</p>
 			</div>
 			<div class="container-fluid">
                 <ul class="full-box list-unstyled page-nav-tabs">

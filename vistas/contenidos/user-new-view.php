@@ -9,7 +9,7 @@
 		<i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO USUARIO
 	</h3>
 	<p class="text-justify">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
+	Aqui podrás visualizar la lista de los usuarios que ya hay registrados en el software, en este apartado puedes eliminar o actualizar los datos del usuario que selecciones.				</p>
 	</p>
 </div>
 
