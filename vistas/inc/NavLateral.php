@@ -80,6 +80,11 @@
                 
 
             </li>
+            <?php
+    
+             if($_SESSION['privilegio_spm']==1 || $_SESSION['privilegio_spm']==2){
+
+            ?>
             
             <li
                 class="sidebar-item  ">
@@ -87,7 +92,7 @@
                     <i class="bi bi-grid-fill"></i>
                     <span>Dashboard</span>
                 </a>
-                
+                <?php }?>
 
             </li>
             
