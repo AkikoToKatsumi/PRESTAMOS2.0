@@ -3,8 +3,7 @@
 			        <i class="fas fa-search-dollar fa-fw"></i> &nbsp; BUSCAR PRÉSTAMOS POR FECHA
 			    </h3>
 			    <p class="text-justify">
-			        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia fugiat est ducimus inventore, repellendus deserunt cum aliquam dignissimos, consequuntur molestiae perferendis quae, impedit doloribus harum necessitatibus magnam voluptatem voluptatum alias!
-			    </p>
+En este apartado podras buscar los prestamos por su fecha de realización.			    </p>
 			</div>
 
 			<div class="container-fluid">

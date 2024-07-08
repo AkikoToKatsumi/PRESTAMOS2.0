@@ -4,8 +4,7 @@
 					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CLIENTES
 				</h3>
 				<p class="text-justify">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
-				</p>
+Aqui podrás visualizar la lista de los clientes que ya hay registrados en el software, en este apartado puedes eliminar o actualizar los datos del cliente que selecciones.				</p>
 			</div>
 
 			<div class="container-fluid">

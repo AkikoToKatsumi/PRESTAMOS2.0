@@ -3,8 +3,7 @@
                     <i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM
                 </h3>
                 <p class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum delectus eos enim numquam fugit optio accusantium, aperiam eius facere architecto facilis quibusdam asperiores veniam omnis saepe est et, quod obcaecati.
-                </p>
+Aquí podrás buscar los items por cualquiera de sus caracteristicas, puede ser codigo de item, nombre, detalle o stock.              </p>
             </div>
 
             <div class="container-fluid">

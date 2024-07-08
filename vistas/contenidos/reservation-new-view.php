@@ -4,8 +4,7 @@
         <i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO PRÉSTAMO
     </h3>
     <p class="text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium quod harum vitae, fugit quo soluta. Molestias officiis voluptatum delectus doloribus at tempore, iste optio quam recusandae numquam non inventore dolor.
-    </p>
+Este es el apartado en donde podras efectuar los registros de los prestamos, agregando un cliente y al mismo agregandole el o los items que va a tomar prestados, sin olvidar tambien añadir la cantidad de horas que tendra el item,cantidad de díás y el costo que tendra por cada parametro.    </p>
 </d>
 
 <div class="container-fluid">

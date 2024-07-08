@@ -79,8 +79,9 @@
         <i class="material-icons">home</i> &nbsp; INICIO
     </h3>
     <p class="text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
-    </p>
+Bienvenido a este sistema de prestamos, esta es nuestra pagina principal, donde podrás visualizar las opciones de todas las operaciones que puedes 
+realizar mediante el software. 
+</p>
 </div>
 
 <!-- Content -->
