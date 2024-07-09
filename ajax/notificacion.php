@@ -17,7 +17,7 @@ $conn = new mysqli("localhost","root","","prestamos");
 $fecha_actual=date("Y-m-d");
 $hora_actual=date("H:i");
 
-$sql = "SELECT * FROM `prestamo` p join cliente c on (p.cliente_id=c.cliente_id) where prestamo_fecha_final >='$fecha_actual' AND prestamo_hora_final>='$hora_actual' OR `prestamo_estado`='Prestamo' OR `prestamo_estado`='Reservacion'  limit 5";
+$sql = "SELECT * FROM `prestamo` p join cliente c on (p.cliente_id=c.cliente_id) where `prestamo_estado`='Prestamo' OR `prestamo_estado`='Reservacion'AND p.prestamo_fecha_final >='$fecha_actual' AND prestamo_hora_final >='$hora_actual'  limit 5";
 $result = mysqli_query($conn, $sql);
 
 $response='';

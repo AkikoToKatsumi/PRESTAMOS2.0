@@ -31,7 +31,7 @@
     $hora_actual = date("H:i");
     $conn = new mysqli("localhost", "root", "", "prestamos");
     $count = 0;
-    $sql2 = "SELECT * FROM `prestamo` p join cliente c on (p.cliente_id=c.cliente_id) where prestamo_fecha_final >='$fecha_actual' AND prestamo_hora_final >='$hora_actual' OR `prestamo_estado`='Prestamo' OR `prestamo_estado`='Reservacion'";
+    $sql2 = "SELECT * FROM `prestamo` p join cliente c on (p.cliente_id=c.cliente_id) where `prestamo_estado`='Reservacion' OR `prestamo_estado`='Prestamo' AND prestamo_fecha_final >='$fecha_actual' AND prestamo_hora_final >='$hora_actual' ";
     $result = mysqli_query($conn, $sql2);
     $count = mysqli_num_rows($result);
     ?>
