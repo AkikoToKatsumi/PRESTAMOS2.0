@@ -104,7 +104,6 @@
 				return header("Location: ".SERVERURL."login/");
 			}
 		} /* Fin controlador */
-
 		/*--------- Controlador cierre de sesion ---------*/
 		public function cerrar_sesion_controlador(){
 			session_start(['name'=>'SPM']);

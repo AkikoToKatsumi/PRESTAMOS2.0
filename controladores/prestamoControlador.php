@@ -5,6 +5,7 @@
             require_once "./modelos/prestamoModelo.php";
         }
         class prestamoControlador extends prestamoModelo{
+
             //controlador buscar cliente para prestamos
         
             public function buscar_cliente_prestamo_controlador(){
@@ -19,7 +20,6 @@
                         Introduce, DNI, nombre, apellido, telefono
                     </p>
                     </div>';
-                
         }
         // seleccionando clientes de la bd
         $datos_cliente=mainModel::ejecutar_consulta_simple("SELECT * FROM cliente WHERE cliente_dni LIKE '%$cliente%' OR
@@ -476,7 +476,6 @@
             $hora_final=date("h:i a",strtotime($hora_final));
 
             //generando codigo
-
             $correlativo=mainModel::ejecutar_consulta_simple("SELECT prestamo_id FROM prestamo");
             $correlativo=($correlativo->rowCount())+1;
             $codigo=mainModel::generar_codigo_aleatorio("CP",7,$correlativo);
@@ -498,7 +497,6 @@
             
 
             //agregar prestamo
-
             $agregar_prestamo=prestamoModelo::agregar_prestamo_modelo($datos_prestamo_reg);
 
             if ($agregar_prestamo->rowCount()!=1) {
@@ -560,7 +558,6 @@
                     $errores_detalle=1;
                     break;
                  }
-
             }
             if ($errores_detalle==0) {
                 unset($_SESSION['datos_cliente']);
@@ -571,7 +568,6 @@
                     "Texto"=>"Los datos del prestamo han sido registrados",
                     "Tipo"=>"success"
                 ];
-               
             }
             else {
                 prestamoModelo::eliminar_prestamo_modelo($codigo,"Detalle");
@@ -583,9 +579,7 @@
                  "Texto"=>"No hemos podido registrar el prestamo (Error: 003), por favor intente nuevamente",
                  "Tipo"=>"error"
              ];
-             
-
-            }
+    }
             echo json_encode($alerta);
     
     }//fin controlador
@@ -1002,7 +996,7 @@
 			  ];
 		  echo json_encode($alerta);
 		  exit();
-		  }
+    }
         $datos_prestamo_up=[
             "Tipo"=>"Prestamo",
             "Estado"=>$estado,
